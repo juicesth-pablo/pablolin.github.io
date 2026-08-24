@@ -41,7 +41,7 @@ h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--acc
 /* HERO — 兩欄 + 照片 */
 .hero-grid{display:grid;grid-template-columns:1.4fr .9fr;align-items:center;gap:clamp(30px,6vw,80px)}
 .hero-photo{opacity:0;transform:translateY(14px);animation:rise 1s ease .45s forwards}
-.hero-photo img{width:100%;aspect-ratio:1/1;border-radius: 50%;object-fit:cover;display:block;border:1px solid var(--line)}
+.hero-photo img{width:100%;aspect-ratio:1/1;border-radius:50%;object-fit:cover;display:block;border:1px solid var(--line)}
 
 /* MARQUEE */
 .marquee{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);overflow:hidden;white-space:nowrap;padding:14px 0;background:var(--ink);color:var(--paper)}
@@ -86,9 +86,15 @@ section{padding:clamp(70px,11vw,150px) 0}
 .exp-row .role{font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:700;text-transform:uppercase;letter-spacing:-.01em}
 .exp-row .org{color:var(--accent);font-weight:700}
 .exp-row p{margin-top:10px;font-size:14.5px;line-height:1.6;color:#4a463f;max-width:60ch}
+/*工作經歷列點呈現*/
+.exp-row ul{margin-top:12px;padding-left:0;list-style:none;max-width:100ch}
+.exp-row li{position:relative;padding-left:20px;font-size:14.5px;line-height:1.6;color:#4a463f}
+.exp-row li+li{margin-top:7px}
+.exp-row li::before{content:"–";position:absolute;left:0;color:var(--accent);font-weight:700}
+#experience{padding-bottom:clamp(30px,5vw,60px)}
 
 /* CONTACT */
-.contact{text-align:center;padding-bottom:clamp(90px,12vw,150px)}
+.contact{text-align:center;padding-top:clamp(250px,5vw,70px);padding-bottom:clamp(200px,12vw,150px)}
 .contact .pre{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
 .contact a.big{display:inline-block;font-size:clamp(2.6rem,12vw,9rem);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.9;transition:.35s}
 .contact a.big:hover{color:var(--accent);letter-spacing:-.01em}
