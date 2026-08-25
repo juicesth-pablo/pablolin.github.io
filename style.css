@@ -146,6 +146,8 @@ footer{border-top:1px solid var(--ink);padding:26px clamp(20px,5vw,64px) 64px;di
   nav ul{display:flex;gap:14px;font-size:11px;letter-spacing:.06em}
   nav .mark{font-size:14px}
   .about-grid{grid-template-columns:1fr}
+  /* 1. hero 上方間距縮小 */
+  header{padding-top:clamp(80px,12vh,110px)}
   /* 手機取消兩端對齊，改左對齊比較好讀（justify 在窄螢幕字距會很怪） */
   .about-grid .body,.exp-row p{text-align:left;hyphens:none}
   .exp-row{grid-template-columns:1fr;gap:6px}
@@ -159,9 +161,16 @@ footer{border-top:1px solid var(--ink);padding:26px clamp(20px,5vw,64px) 64px;di
   .shot.tall{grid-row:auto;aspect-ratio:4/3}
   .hero-grid{grid-template-columns:1fr;gap:34px}
   /* 手機把照片置中（預設是靠左，容易看起來「偏一邊」） */
-  .hero-photo{max-width:300px;margin:0 auto}
+  /* 3. 照片縮小（改 max-width，數字越小圖越小） */
+  .hero-photo{max-width:200px;margin:24px auto 0}
   .case-photo img{max-width:420px;margin:0 auto}
   .scroll-cue{display:none}
+  .work-item .meta{display:none}
+  /* 4. 跑馬燈縮小 */
+  .marquee{padding:9px 0}
+  .marquee div{font-size:12px}
+  .marquee span{padding:0 18px}
+  h1 .row{display:inline-block}
 }
 @media print{
   nav,.scroll-cue,.marquee{display:none}
