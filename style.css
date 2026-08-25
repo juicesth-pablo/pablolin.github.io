@@ -147,7 +147,7 @@ footer{border-top:1px solid var(--ink);padding:26px clamp(20px,5vw,64px) 64px;di
   nav .mark{font-size:14px}
   .about-grid{grid-template-columns:1fr}
   /* 1. hero 上方間距縮小 */
-  header{padding-top:clamp(80px,12vh,110px)}
+  header{min-height:auto;padding-top:clamp(80px,12vh,110px);padding-bottom:36px}
   /* 手機取消兩端對齊，改左對齊比較好讀（justify 在窄螢幕字距會很怪） */
   .about-grid .body,.exp-row p{text-align:left;hyphens:none}
   .exp-row{grid-template-columns:1fr;gap:6px}
@@ -167,9 +167,9 @@ footer{border-top:1px solid var(--ink);padding:26px clamp(20px,5vw,64px) 64px;di
   .scroll-cue{display:none}
   .work-item .meta{display:none}
   /* 4. 跑馬燈縮小 */
-  .marquee{padding:9px 0}
-  .marquee div{font-size:12px}
-  .marquee span{padding:0 18px}
+  .marquee{padding:8px 0}
+  .marquee div{font-size:10px}
+  .marquee span{padding:0 16px}
   h1 .row{display:inline-block}
   .eyebrow{display:inline-block;font-size:8px}
 }
