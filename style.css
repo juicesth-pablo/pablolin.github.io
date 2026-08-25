@@ -19,7 +19,7 @@ a{color:inherit;text-decoration:none}
 .wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
 
 /* NAV */
-nav{position:fixed;top:16px;left:0;right:0;z-index:50;width:calc(100% - 32px);max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;border-radius:100px;background:rgba(240,238,233,.3);backdrop-filter:blur(3px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border:1px solid rgba(255,255,255,.55);box-shadow:0 6px 24px rgba(26,26,27,.08);color:var(--ink)}
+nav{position:fixed;top:16px;left:0;right:0;z-index:50;width:calc(100% - 32px);max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;border-radius:100px;background:rgba(240,238,233,.3);backdrop-filter:blur(3px) saturate(1.4);-webkit-backdrop-filter:blur(3px) saturate(1.4);border:1px solid rgba(255,255,255,.55);box-shadow:0 6px 24px rgba(26,26,27,.08);color:var(--ink)}
 nav .mark{font-weight:800;letter-spacing:.02em;font-size:16px;text-transform:uppercase}
 nav ul{display:flex;gap:26px;list-style:none;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
 nav a:hover{opacity:.55}
@@ -106,7 +106,7 @@ footer{border-top:1px solid var(--ink);padding:26px clamp(20px,5vw,64px) 64px;di
 .backlink{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:inline-flex;gap:8px;margin-bottom:40px}
 .backlink:hover{color:var(--accent)}
 .case-tags{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
-.case-title{font-size:clamp(0.8rem,4.5vw,3.5rem);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.9}
+.case-title{font-size:clamp(1.8rem,7vw,3.5rem);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.9}
 .case-hero-grid{display:grid;grid-template-columns:1.3fr .9fr;align-items:center;gap:clamp(30px,5vw,70px)}
 .case-photo img{width:100%;aspect-ratio:4/5;object-fit:contain;display:block;border:none}
 
@@ -142,18 +142,26 @@ footer{border-top:1px solid var(--ink);padding:26px clamp(20px,5vw,64px) 64px;di
 @keyframes scroll{to{transform:translateX(-50%)}}
 
 @media(max-width:820px){
-  nav ul{display:none}
+  nav{gap:12px;padding:11px 20px}
+  nav ul{display:flex;gap:14px;font-size:11px;letter-spacing:.06em}
+  nav .mark{font-size:14px}
   .about-grid{grid-template-columns:1fr}
+  /* 手機取消兩端對齊，改左對齊比較好讀（justify 在窄螢幕字距會很怪） */
+  .about-grid .body,.exp-row p{text-align:left;hyphens:none}
   .exp-row{grid-template-columns:1fr;gap:6px}
   .work-item{grid-template-columns:34px 1fr;gap:14px}
   .work-item .meta{grid-column:1/-1;text-align:left;margin-top:10px}
   .metrics{grid-template-columns:1fr}
+  /* 內頁兩欄 hero 在手機收成單欄（沒收就會擠成一團） */
   .case-hero-grid{grid-template-columns:1fr;gap:28px}
   .case-body{grid-template-columns:1fr;gap:14px}
   .gallery{grid-template-columns:1fr}
   .shot.tall{grid-row:auto;aspect-ratio:4/3}
   .hero-grid{grid-template-columns:1fr;gap:34px}
-  .hero-photo{max-width:300px}
+  /* 手機把照片置中（預設是靠左，容易看起來「偏一邊」） */
+  .hero-photo{max-width:300px;margin:0 auto}
+  .case-photo img{max-width:420px;margin:0 auto}
+  .scroll-cue{display:none}
 }
 @media print{
   nav,.scroll-cue,.marquee{display:none}
