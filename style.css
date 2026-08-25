@@ -171,6 +171,7 @@ footer{border-top:1px solid var(--ink);padding:26px clamp(20px,5vw,64px) 64px;di
   .marquee div{font-size:12px}
   .marquee span{padding:0 18px}
   h1 .row{display:inline-block}
+  .eyebrow{display:inline-block;font-size:8px}
 }
 @media print{
   nav,.scroll-cue,.marquee{display:none}
