@@ -1,3 +1,26 @@
+/* =========================================================
+   Pablo Lin — Portfolio 樣式表
+   目錄：
+   01. 全域設定（變數、reset、共用容器）
+   02. 導覽列 NAV（浮動毛玻璃膠囊）
+   03. 首頁 HERO（大標、個人資訊、照片、Scroll 提示）
+   04. 跑馬燈 MARQUEE
+   05. 區塊通用（section 間距、區塊標題）
+   06. SELECTED WORK 作品網格
+   07. ABOUT 關於
+   08. EXPERIENCE 經歷
+   09. CONTACT 聯絡
+   10. FOOTER 頁尾
+   11. 作品內頁 CASE STUDY（內頁 hero、metrics、內文、圖庫、下一個專案）
+   12. 進場動畫 REVEAL 與 keyframes
+   13. 響應式 RWD（手機 ≤820px）
+   14. 列印樣式 PRINT
+   15. 頁面切換動畫（View Transitions）
+   ========================================================= */
+
+
+/* ============ 01. 全域設定 ============ */
+/* 全站顏色 / 字體變數，改這裡就能一次換色換字 */
 :root{
   --paper:#F0EEE9;
   --ink:#1A1A1B;
@@ -8,175 +31,882 @@
   --serif:Georgia,"Times New Roman",serif;
   --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
 }
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  background:var(--paper);color:var(--ink);font-family:var(--display);
-  -webkit-font-smoothing:antialiased;overflow-x:hidden;line-height:1.4;
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box
 }
-a{color:inherit;text-decoration:none}
-::selection{background:var(--accent);color:#fff}
-.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
 
-/* NAV */
-nav{position:fixed;top:16px;left:0;right:0;z-index:50;width:calc(100% - 32px);max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:12px 24px;border-radius:100px;background:rgba(240,238,233,.3);backdrop-filter:blur(3px) saturate(1.4);-webkit-backdrop-filter:blur(3px) saturate(1.4);border:1px solid rgba(255,255,255,.55);box-shadow:0 6px 24px rgba(26,26,27,.08);color:var(--ink)}
-nav .mark{font-weight:800;letter-spacing:.02em;font-size:16px;text-transform:uppercase}
-nav ul{display:flex;gap:26px;list-style:none;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
-nav a:hover{opacity:.55}
+html{
+  scroll-behavior:smooth
+}
 
-/* HERO */
-header{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-start;position:relative;padding-top:clamp(130px,25vh,210px)}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-bottom:26px}
-.eyebrow span{display:inline-block;opacity:0;transform:translateY(14px);animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards}
-h1{font-weight:800;font-size:clamp(3rem,9vw,8rem);line-height:.86;letter-spacing:-.03em;text-transform:uppercase}
-h1 .row{overflow:hidden;display:block}
-h1 .row i{display:block;font-style:normal;transform:translateY(105%);animation:slideUp .95s cubic-bezier(.16,1,.3,1) forwards}
-h1 .row:nth-child(2) i{animation-delay:.08s}
-h1 em{font-family:var(--serif);font-style:normal;font-weight:400;color:var(--accent)}
-.hero-meta{display:flex;flex-wrap:wrap;gap:12px 44px;margin-top:clamp(30px,5vw,58px);font-size:14px;letter-spacing:.02em;color:var(--muted);opacity:0;animation:rise 1s ease .5s forwards}
-.hero-meta b{color:var(--ink);font-weight:700}
-.scroll-cue{position:absolute;bottom:34px;left:max(clamp(20px,5vw,64px),calc((100% - 1240px)/2 + clamp(20px,5vw,64px)));font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px;opacity:0;animation:rise 1s ease .8s forwards}
-.scroll-cue .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.6s infinite}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--display);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  line-height:1.4;
+}
 
-/* HERO — 兩欄 + 照片 */
-.hero-grid{display:grid;grid-template-columns:1.4fr .9fr;align-items:center;gap:clamp(30px,6vw,80px)}
-.hero-photo{opacity:0;transform:translateY(14px);animation:rise 1s ease .45s forwards}
-.hero-photo img{width:100%;aspect-ratio:1/1;border-radius:50%;object-fit:cover;display:block;border:1px solid var(--line)}
+a{
+  color:inherit;
+  text-decoration:none
+}
 
-/* MARQUEE */
-.marquee{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);overflow:hidden;white-space:nowrap;padding:14px 0;background:var(--ink);color:var(--paper)}
-.marquee div{display:inline-block;animation:scroll 28s linear infinite;font-weight:700;text-transform:uppercase;letter-spacing:.04em;font-size:15px}
-.marquee span{padding:0 26px}
-.marquee span i{font-style:normal;color:var(--accent)}
+::selection{
+  background:var(--accent);
+  color:#fff
+}
 
-/* SECTION */
-section{padding:clamp(70px,11vw,150px) 0}
-.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:clamp(34px,5vw,64px)}
-.sec-head .no{font-family:var(--mono);font-size:13px;color:var(--accent);letter-spacing:.1em}
-.sec-head h2{font-size:clamp(1.6rem,4vw,2.6rem);text-transform:uppercase;letter-spacing:-.01em;font-weight:800}
+/* .wrap：全站共用的置中容器（最大寬 1240、左右留白） */
+.wrap{
+  max-width:1240px;
+  margin:0 auto;
+  padding:0 clamp(20px,5vw,64px)
+}
 
-/* WORK LIST */
-.work-item{display:grid;grid-template-columns:60px 1fr auto;align-items:center;gap:24px;padding:clamp(22px,3vw,38px) 0;border-top:1px solid var(--line);position:relative;transition:padding-left 1s cubic-bezier(.22,1,.36,1)}
-.work-item:last-child{border-bottom:1px solid var(--line)}
-.work-item .idx{font-family:var(--mono);font-size:13px;color:var(--muted)}
-.work-item .title{font-size:clamp(1.2rem,4.2vw,3.2rem);font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:1;transition:color .6s cubic-bezier(.22,1,.36,1)}
-.work-item .title small{display:block;font-family:var(--serif);font-style:normal;font-weight:400;font-size:clamp(.85rem,1.5vw,1rem);color:var(--muted);text-transform:none;letter-spacing:0;margin-top:10px}
-.work-item .meta{text-align:right;font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.06em;line-height:1.7}
-.work-item .meta .yr{color:var(--ink);font-weight:600}
-.work-item:hover{padding-left:30px}
-.work-item:hover .title{color:var(--accent)}
-.work-item .arrow{position:absolute;left:0;top:0;bottom:0;display:flex;align-items:center;opacity:0;transform:translateX(-8px);transition:opacity 1s cubic-bezier(.22,1,.36,1),transform 1s cubic-bezier(.22,1,.36,1);font-size:22px;color:var(--accent);line-height:1;padding-bottom:5px}
-.work-item:hover .arrow{opacity:1;transform:translateX(0)}
 
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:clamp(30px,6vw,90px)}
-.about-grid .lead{font-size:clamp(1.3rem,3vw,2.1rem);line-height:1.32;font-weight:500;letter-spacing:-.01em}
-.about-grid .lead em{font-family:var(--serif);font-style:normal;color:var(--accent);font-weight:400}
-.about-grid .body{font-family:var(--serif);text-align:justify;hyphens:auto;font-size:15px;line-height:1.7;color:#4a463f;max-width:52ch;padding-top:clamp(15px,2.8vw,35px)}
-.sidecard{border-top:2px solid var(--ink);padding-top:20px}
-.sidecard h3{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-.taglist{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
-.taglist span{border:1px solid var(--line);border-radius:100px;padding:7px 14px;font-size:12.5px;letter-spacing:.02em;transition:background-color .35s cubic-bezier(.22,1,.36,1),color .35s cubic-bezier(.22,1,.36,1),border-color .35s cubic-bezier(.22,1,.36,1)}
-.taglist span:hover{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+/* ============ 02. 導覽列 NAV ============ */
+/* 固定在頂端的浮動膠囊，毛玻璃效果 */
+nav{
+  position:fixed;
+  top:16px;
+  left:0;
+  right:0;
+  z-index:50;
+  width:calc(100% - 32px);
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  padding:12px 24px;
+  border-radius:100px;
+  background:rgba(240,238,233,.3);
+  backdrop-filter:blur(3px) saturate(1.4);
+  -webkit-backdrop-filter:blur(3px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.55);
+  box-shadow:0 6px 24px rgba(26,26,27,.08);
+  color:var(--ink)
+}
 
-/* EXPERIENCE */
-.exp-row{display:grid;grid-template-columns:180px 1fr;gap:20px;padding:26px 0;border-top:1px solid var(--line)}
-.exp-row:last-child{border-bottom:1px solid var(--line)}
-.exp-row .when{font-family:var(--mono);font-size:12.5px;color:var(--muted);letter-spacing:.04em;padding-top:5px}
-.exp-row .role{font-size:clamp(1.15rem,2.4vw,1.5rem);font-weight:700;text-transform:uppercase;letter-spacing:-.01em}
-.exp-row .org{color:var(--accent);font-weight:700}
-.exp-row p{font-family:var(--serif);text-align:justify;hyphens:auto;margin-top:10px;font-size:14.5px;line-height:1.6;color:#4a463f;max-width:125ch}
-#experience{padding-bottom:clamp(30px,5vw,60px)}
+nav .mark{
+  font-weight:800;
+  letter-spacing:.02em;
+  font-size:16px;
+  text-transform:uppercase
+}
 
-/* CONTACT */
-.contact{text-align:center;padding-top:clamp(120px,20vw,260px);padding-bottom:clamp(100px,16vw,200px)}
-.contact .pre{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
-.contact a.big{display:inline-block;font-size:clamp(2.6rem,12vw,9rem);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.9;transition:.35s}
-.contact a.big:hover{color:var(--accent);letter-spacing:-.01em}
-.contact a.big em{font-family:var(--serif);font-style:normal;font-weight:400}
-.socials{display:flex;justify-content:center;gap:30px;margin-top:44px;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
-.socials a{position:relative}
-.socials a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1.5px;background:var(--accent);transition:.3s}
-.socials a:hover::after{width:100%}
+nav ul{
+  display:flex;
+  gap:26px;
+  list-style:none;
+  font-size:13px;
+  letter-spacing:.14em;
+  text-transform:uppercase
+}
 
-footer{border-top:1px solid var(--ink);padding:26px clamp(20px,5vw,64px) 64px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+nav a:hover{
+  opacity:.55
+}
 
-/* ===== CASE STUDY (work detail page) ===== */
-.case-hero{padding-top:clamp(70px,14vw,140px);padding-bottom:clamp(110px,5.5vw,130px)}
-.backlink{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:inline-flex;gap:8px;margin-bottom:40px}
-.backlink:hover{color:var(--accent)}
-.case-tags{font-family:var(--mono);font-size:12px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
-.case-title{font-size:clamp(1.8rem,7vw,3.5rem);font-weight:800;text-transform:uppercase;letter-spacing:-.03em;line-height:.9}
-.case-hero-grid{display:grid;grid-template-columns:1.3fr .9fr;align-items:center;gap:clamp(30px,5vw,70px)}
-.case-photo img{width:100%;aspect-ratio:4/5;object-fit:contain;display:block;border:none}
 
-.metrics{display:flex;flex-wrap:wrap;gap:14px 48px;background:none;border:none;margin:clamp(20px,4vw,40px) 0 0}
-.stat{background:none;padding:0}
-.stat .num{font-size:14px;font-weight:700;color:var(--ink);letter-spacing:.02em;line-height:1.3}
-.stat .num em{font-family:var(--serif);font-style:normal;color:var(--accent);font-weight:400}
-.stat .lbl{font-family:var(--display);font-size:14px;letter-spacing:.02em;text-transform:none;color:var(--muted);margin-top:2px}
+/* ============ 03. 首頁 HERO ============ */
+/* header：整個首屏，內容靠上排列 */
+header{
+  min-height:100svh;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  position:relative;
+  padding-top:clamp(130px,25vh,210px)
+}
 
-.case-body{display:grid;grid-template-columns:180px 1fr;gap:clamp(24px,5vw,70px);margin-top:clamp(10px,3vw,80px);padding:clamp(20px,4vw,40px) 0;border-top:1px solid var(--line)}
-.case-body:last-of-type{border-bottom:1px solid var(--line)}
-.case-body h3{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);padding-top:6px}
-.case-body p{text-align:justify;hyphens:auto;font-family:var(--serif);font-size:clamp(1rem,1.2vw,1.5rem);line-height:1.7;color:#37332c;max-width:100ch}
-.case-body p+p{margin-top:18px}
+/* eyebrow：大標上方的小標籤（Social & Marketing…） */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:26px
+}
 
-.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:clamp(48px,7vw,90px) 0}
-.shot{aspect-ratio:4/3;background:none;border:none;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center;padding:20px}
-.shot.tall{aspect-ratio:auto;grid-row:span 2}
-.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.eyebrow span{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(14px);
+  animation:rise .8s cubic-bezier(.2,.7,.2,1) forwards
+}
 
-.next-proj{border-top:1px solid var(--ink);padding:clamp(50px,8vw,90px) 0;text-align:center}
-.next-proj .pre{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
-.next-proj a{font-size:clamp(1.4rem,4.5vw,2.8rem);font-weight:800;text-transform:uppercase;letter-spacing:-.02em;transition:color .3s}
-.next-proj a:hover{color:var(--accent)}
+/* h1：Pablo Lin 大標，兩個 .row 各佔一行；em 是主色點綴 */
+h1{
+  font-weight:800;
+  font-size:clamp(3rem,9vw,8rem);
+  line-height:.86;
+  letter-spacing:-.03em;
+  text-transform:uppercase
+}
 
-/* REVEAL */
-.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.reveal.in{opacity:1;transform:none}
+h1 .row{
+  overflow:hidden;
+  display:block
+}
 
-@keyframes slideUp{to{transform:translateY(0)}}
-@keyframes rise{to{opacity:1;transform:none}}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-@keyframes scroll{to{transform:translateX(-50%)}}
+h1 .row i{
+  display:block;
+  font-style:normal;
+  transform:translateY(105%);
+  animation:slideUp .95s cubic-bezier(.16,1,.3,1) forwards
+}
 
+h1 .row:nth-child(2) i{
+  animation-delay:.08s
+}
+
+h1 em{
+  font-family:var(--serif);
+  font-style:normal;
+  font-weight:400;
+  color:var(--accent)
+}
+
+/* hero-meta：大標下方的職稱／年資小字 */
+.hero-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px 44px;
+  margin-top:clamp(30px,5vw,58px);
+  font-size:14px;
+  letter-spacing:.02em;
+  color:var(--muted);
+  opacity:0;
+  animation:rise 1s ease .5s forwards
+}
+
+.hero-meta b{
+  color:var(--ink);
+  font-weight:700
+}
+
+/* scroll-cue：左下角「Scroll」提示（手機會隱藏） */
+.scroll-cue{
+  position:absolute;
+  bottom:34px;
+  left:max(clamp(20px,5vw,64px),calc((100% - 1240px)/2 + clamp(20px,5vw,64px)));
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  opacity:0;
+  animation:rise 1s ease .8s forwards
+}
+
+.scroll-cue .dot{
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:var(--accent);
+  animation:blink 1.6s infinite
+}
+
+/* hero-grid：左文字、右圓形照片的兩欄排版 */
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.4fr .9fr;
+  align-items:center;
+  gap:clamp(30px,6vw,80px)
+}
+
+.hero-photo{
+  opacity:0;
+  transform:translateY(14px);
+  animation:rise 1s ease .45s forwards
+}
+
+.hero-photo img{
+  width:100%;
+  aspect-ratio:1/1;
+  border-radius:50%;
+  object-fit:cover;
+  display:block;
+  border:1px solid var(--line)
+}
+
+
+/* ============ 04. 跑馬燈 MARQUEE ============ */
+/* 黑底橫向無限捲動的技能標語列 */
+.marquee{
+  border-top:1px solid var(--ink);
+  border-bottom:1px solid var(--ink);
+  overflow:hidden;
+  white-space:nowrap;
+  padding:14px 0;
+  background:var(--ink);
+  color:var(--paper)
+}
+
+.marquee div{
+  display:inline-block;
+  animation:scroll 28s linear infinite;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  font-size:15px
+}
+
+.marquee span{
+  padding:0 26px
+}
+
+.marquee span i{
+  font-style:normal;
+  color:var(--accent)
+}
+
+
+/* ============ 05. 區塊通用 ============ */
+/* section：各大區塊的上下間距；sec-head：區塊編號 + 標題 */
+section{
+  padding:clamp(70px,11vw,150px) 0
+}
+
+.sec-head{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  margin-bottom:clamp(34px,5vw,64px)
+}
+
+.sec-head .no{
+  font-family:var(--mono);
+  font-size:13px;
+  color:var(--accent);
+  letter-spacing:.1em
+}
+
+.sec-head h2{
+  font-size:clamp(1.6rem,4vw,2.6rem);
+  text-transform:uppercase;
+  letter-spacing:-.01em;
+  font-weight:800
+}
+
+
+/* ============ 06. SELECTED WORK 作品網格 ============ */
+/* work-grid：自動排列的卡片網格，寬螢幕多欄、窄螢幕自動變單欄 */
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:clamp(24px,3vw,44px)
+}
+
+/* work-card：單張作品卡（圖在上、資訊在下） */
+.work-card{
+  display:flex;
+  flex-direction:column
+}
+
+/* 圖片區：固定 4:3，hover 時圖片微放大 */
+.work-card-img{
+  aspect-ratio:4/3;
+  overflow:hidden;
+  background:var(--line);
+  border-radius:14px;
+}
+
+.work-card-img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .7s cubic-bezier(.22,1,.36,1)
+}
+
+.work-card:hover .work-card-img img{
+  transform:scale(1.05)
+}
+
+/* 卡片文字區：撐滿剩餘高度，好讓 meta 貼到底 */
+.work-card-info{
+  padding-top:16px;
+  display:flex;
+  flex-direction:column;
+  flex:1
+}
+
+.work-card .idx{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--muted)
+}
+
+.work-card-title{
+  font-size:clamp(1.1rem,2vw,1.5rem);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:-.02em;
+  line-height:1.1;
+  margin-top:8px;
+  transition:color .4s cubic-bezier(.22,1,.36,1)
+}
+
+.work-card:hover .work-card-title{
+  color:var(--accent)
+}
+
+.work-card-desc{
+  font-family:var(--display);
+  font-size:14px;
+  line-height:1.55;
+  color:var(--muted);
+  margin-top:8px
+}
+
+.work-card-meta{
+  display:block;
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:auto;
+  padding-top:12px
+}
+
+
+/* ============ 07. ABOUT 關於 ============ */
+/* about-grid：左自我介紹、右能力/工具卡片的兩欄 */
+.about-grid{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:clamp(30px,6vw,90px)
+}
+
+.about-grid .lead{
+  font-size:clamp(1.3rem,3vw,2.1rem);
+  line-height:1.32;
+  font-weight:500;
+  letter-spacing:-.01em
+}
+
+.about-grid .lead em{
+  font-family:var(--serif);
+  font-style:normal;
+  color:var(--accent);
+  font-weight:400
+}
+
+.about-grid .body{
+  font-family:var(--display);
+  text-align:justify;
+  hyphens:auto;
+  font-size:15px;
+  line-height:1.7;
+  color:#4a463f;
+  max-width:52ch;
+  padding-top:clamp(15px,2.8vw,35px)
+}
+
+/* sidecard：右側 Capabilities / Tools 卡片 */
+.sidecard{
+  border-top:2px solid var(--ink);
+  padding-top:20px
+}
+
+.sidecard h3{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:16px
+}
+
+/* taglist：能力/工具的膠囊標籤（hover 變主色底黑字） */
+.taglist{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:36px
+}
+
+.taglist span{
+  border:1px solid var(--line);
+  border-radius:100px;
+  padding:7px 14px;
+  font-size:12.5px;
+  letter-spacing:.02em;
+  transition:background-color .35s cubic-bezier(.22,1,.36,1),color .35s cubic-bezier(.22,1,.36,1),border-color .35s cubic-bezier(.22,1,.36,1)
+}
+
+.taglist span:hover{
+  background:var(--accent);
+  color:var(--paper);
+  border-color:var(--accent)
+}
+
+
+/* ============ 08. EXPERIENCE 經歷 ============ */
+/* exp-row：每段經歷（左時間、右職稱與敘述） */
+.exp-row{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:20px;
+  padding:26px 0;
+  border-top:1px solid var(--line)
+}
+
+.exp-row:last-child{
+  border-bottom:1px solid var(--line)
+}
+
+.exp-row .when{
+  font-family:var(--mono);
+  font-size:12.5px;
+  color:var(--muted);
+  letter-spacing:.04em;
+  padding-top:5px
+}
+
+.exp-row .role{
+  font-size:clamp(1.15rem,2.4vw,1.5rem);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:-.01em
+}
+
+.exp-row .org{
+  color:var(--accent);
+  font-weight:700
+}
+
+.exp-row p{
+  font-family:var(--display);
+  text-align:justify;
+  hyphens:auto;
+  margin-top:10px;
+  font-size:14.5px;
+  line-height:1.6;
+  color:#4a463f;
+  max-width:125ch
+}
+
+/* 收窄 Experience 到 Contact 之間的間距 */
+#experience{
+  padding-bottom:clamp(30px,5vw,60px)
+}
+
+
+/* ============ 09. CONTACT 聯絡 ============ */
+/* 置中的大型 CTA「Let's talk」與社群連結 */
+.contact{
+  text-align:center;
+  padding-top:clamp(120px,20vw,260px);
+  padding-bottom:clamp(100px,16vw,200px)
+}
+
+.contact .pre{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:24px
+}
+
+.contact a.big{
+  display:inline-block;
+  font-size:clamp(2.6rem,12vw,9rem);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:-.03em;
+  line-height:.9;
+  transition:.35s
+}
+
+.contact a.big:hover{
+  color:var(--accent);
+  letter-spacing:-.01em
+}
+
+.contact a.big em{
+  font-family:var(--serif);
+  font-style:normal;
+  font-weight:400
+}
+
+/* socials：Email / IG / LinkedIn，hover 有底線動畫 */
+.socials{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  margin-top:44px;
+  font-size:13px;
+  letter-spacing:.16em;
+  text-transform:uppercase
+}
+
+.socials a{
+  position:relative
+}
+
+.socials a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-5px;
+  width:0;
+  height:1.5px;
+  background:var(--accent);
+  transition:.3s
+}
+
+.socials a:hover::after{
+  width:100%
+}
+
+
+/* ============ 10. FOOTER 頁尾 ============ */
+footer{
+  border-top:1px solid var(--ink);
+  padding:26px clamp(20px,5vw,64px) 64px;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  font-family:var(--mono);
+  font-size:11.5px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted)
+}
+
+
+/* ============ 11. 作品內頁 CASE STUDY ============ */
+/* case-hero / case-hero-grid：內頁頂端，左文字（含 metrics）右圖片 */
+.case-hero{
+  padding-top:clamp(70px,14vw,140px);
+  padding-bottom:clamp(110px,5.5vw,130px)
+}
+
+.backlink{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+  display:inline-flex;
+  gap:8px;
+  margin-bottom:40px
+}
+
+.backlink:hover{
+  color:var(--accent)
+}
+
+.case-tags{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.1em;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin-bottom:20px
+}
+
+.case-title{
+  font-size:clamp(1.8rem,7vw,3.5rem);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:-.03em;
+  line-height:.9
+}
+
+.case-hero-grid{
+  display:grid;
+  grid-template-columns:1.3fr .9fr;
+  align-items:center;
+  gap:clamp(30px,5vw,70px)
+}
+
+.case-photo img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:contain;
+  display:block;
+  border:none
+}
+
+/* 影片作品：右側自動播放的影片（Reels 直式 9/16；橫式影片改 16/9） */
+.case-photo video{
+  width:70%;
+  aspect-ratio:9/16;
+  object-fit:cover;
+  display:block;
+  border:none;
+  border-radius:14px;
+  justify-self:end;
+}
+
+/* metrics / stat：成效數字（做成像首頁小字的輕量橫排） */
+.metrics{
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px 48px;
+  background:none;
+  border:none;
+  margin:clamp(20px,4vw,40px) 0 0
+}
+
+.stat{
+  background:none;
+  padding:0
+}
+
+.stat .num{
+  font-size:14px;
+  font-weight:700;
+  color:var(--ink);
+  letter-spacing:.02em;
+  line-height:1.3
+}
+
+.stat .num em{
+  font-family:var(--serif);
+  font-style:normal;
+  color:var(--accent);
+  font-weight:400
+}
+
+.stat .lbl{
+  font-family:var(--display);
+  font-size:14px;
+  letter-spacing:.02em;
+  text-transform:none;
+  color:var(--muted);
+  margin-top:2px
+}
+
+/* case-body：Overview 等內文區塊（左小標、右段落，上下有分隔線） */
+.case-body{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:clamp(24px,5vw,70px);
+  margin-top:clamp(10px,3vw,80px);
+  padding:clamp(20px,4vw,40px) 0;
+  border-top:1px solid var(--line)
+}
+
+.case-body:last-of-type{
+  border-bottom:1px solid var(--line)
+}
+
+.case-body h3{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--accent);
+  padding-top:6px
+}
+
+.case-body p{
+  text-align:justify;
+  hyphens:auto;
+  font-family:var(--display);
+  font-size:clamp(1rem,1.2vw,1.5rem);
+  line-height:1.7;
+  color:#37332c;
+  max-width:100ch
+}
+
+.case-body p+p{
+  margin-top:18px
+}
+
+/* gallery / shot：作品圖庫（兩欄，.tall 可跨兩列做直式圖） */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+  margin:clamp(48px,7vw,90px) 0
+}
+
+.shot{
+  aspect-ratio:4/3;
+  background:none;
+  border:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-align:center;
+  padding:20px
+}
+
+.shot.tall{
+  aspect-ratio:auto;
+  grid-row:span 2
+}
+
+.shot img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block
+}
+
+/* next-proj：內頁底部「下一個專案」導引 */
+.next-proj{
+  border-top:1px solid var(--ink);
+  padding:clamp(50px,8vw,90px) 0;
+  text-align:center
+}
+
+.next-proj .pre{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:18px
+}
+
+.next-proj a{
+  font-size:clamp(1.4rem,4.5vw,2.8rem);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:-.02em;
+  transition:color .3s
+}
+
+.next-proj a:hover{
+  color:var(--accent)
+}
+
+
+/* ============ 12. 進場動畫 REVEAL 與 keyframes ============ */
+/* reveal：捲動進入畫面時淡入上移（由 app.js 加上 .in 觸發） */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)
+}
+
+.reveal.in{
+  opacity:1;
+  transform:none
+}
+
+@keyframes slideUp{
+  to{transform:translateY(0)}
+}
+
+@keyframes rise{
+  to{opacity:1;transform:none}
+}
+
+@keyframes blink{
+  0%,100%{opacity:1}50%{opacity:.25}
+}
+
+@keyframes scroll{
+  to{transform:translateX(-50%)}
+}
+
+
+/* ============ 13. 響應式 RWD（手機 ≤820px） ============ */
 @media(max-width:820px){
+  /* 導覽列：顯示選單連結並縮小塞進膠囊 */
   nav{gap:12px;padding:11px 20px}
   nav ul{display:flex;gap:14px;font-size:11px;letter-spacing:.06em}
   nav .mark{font-size:14px}
-  .about-grid{grid-template-columns:1fr}
-  /* 1. hero 上方間距縮小 */
-  header{min-height:auto;padding-top:clamp(80px,12vh,110px);padding-bottom:36px}
-  /* 手機取消兩端對齊，改左對齊比較好讀（justify 在窄螢幕字距會很怪） */
-  .about-grid .body,.exp-row p{text-align:left;hyphens:none}
-  .exp-row{grid-template-columns:1fr;gap:6px}
-  .work-item{grid-template-columns:34px 1fr;gap:14px}
-  .work-item .meta{grid-column:1/-1;text-align:left;margin-top:10px}
-  .metrics{grid-template-columns:1fr}
-  /* 內頁兩欄 hero 在手機收成單欄（沒收就會擠成一團） */
-  .case-hero-grid{grid-template-columns:1fr;gap:28px}
-  .case-body{grid-template-columns:1fr;gap:14px}
-  .gallery{grid-template-columns:1fr}
-  .shot.tall{grid-row:auto;aspect-ratio:4/3}
+
+  /* 首頁 HERO：取消滿版高度、縮上方間距、收成單欄、照片縮小置中 */
+  header{min-height:auto;padding-top:clamp(80px,12vh,110px);padding-bottom:12px}
   .hero-grid{grid-template-columns:1fr;gap:34px}
-  /* 手機把照片置中（預設是靠左，容易看起來「偏一邊」） */
-  /* 3. 照片縮小（改 max-width，數字越小圖越小） */
   .hero-photo{max-width:200px;margin:24px auto 0}
-  .case-photo img{max-width:420px;margin:0 auto}
-  .scroll-cue{display:none}
-  .work-item .meta{display:none}
-  /* 4. 跑馬燈縮小 */
+  h1 .row{display:inline-block}      /* 大標在手機並成一行 */
+  .eyebrow{display:inline-block;font-size:8px}
+  .scroll-cue{display:none}          /* 手機隱藏 Scroll 提示 */
+
+  /* 跑馬燈：縮小字級與高度 */
   .marquee{padding:8px 0}
   .marquee div{font-size:10px}
   .marquee span{padding:0 16px}
-  h1 .row{display:inline-block}
-  .eyebrow{display:inline-block;font-size:8px}
+
+  /* About / Experience：收成單欄；長文改左對齊比較好讀 */
+  .about-grid{grid-template-columns:1fr}
+  .exp-row{grid-template-columns:1fr;gap:6px}
+  .about-grid .body,.exp-row p{text-align:left;hyphens:none}
+
+  /* 作品內頁：hero 與內文收成單欄、圖片置中 */
+  .case-hero-grid{grid-template-columns:1fr;gap:28px}
+  .case-photo img{max-width:420px;margin:0 auto}
+  .case-photo video{max-width:300px;margin:0 auto}
+  .case-body{grid-template-columns:1fr;gap:14px}
+  .metrics{grid-template-columns:1fr}
+  .gallery{grid-template-columns:1fr}
+  .shot.tall{grid-row:auto;aspect-ratio:4/3}
 }
+
+
+/* ============ 14. 列印樣式 PRINT ============ */
+/* 列印時隱藏導覽/動畫、白底、縮短間距 */
 @media print{
   nav,.scroll-cue,.marquee{display:none}
   body{background:#fff}
   .reveal{opacity:1;transform:none}
   section{padding:30px 0}
   header{min-height:auto}
+}
+
+
+/* ============ 15. 頁面切換動畫（View Transitions） ============ */
+/* 啟用跨頁面切換動畫 */
+@view-transition{
+  navigation: auto;
+}
+
+@keyframes page-slide-up{
+  from{ transform: translateY(100%);}
+}
+
+@keyframes page-slide-down{
+  to{ transform: translateY(100%);}
+}
+
+/* 前進（點連結進入新頁）：新頁從底部滑上來、蓋住舊頁 */
+html:active-view-transition-type(forward)::view-transition-new(root){
+  animation: .8s cubic-bezier(.22,1,.36,1) both page-slide-up;
+}
+
+html:active-view-transition-type(forward)::view-transition-old(root){
+  animation: none;
+}
+
+/* 返回：舊頁往下滑走、露出底下的前一頁 */
+html:active-view-transition-type(back)::view-transition-old(root){
+  animation: .8s cubic-bezier(.22,1,.36,1) both page-slide-down; z-index: 9999;
+}
+
+html:active-view-transition-type(back)::view-transition-new(root){
+  animation: none;
+}
+
+/* 後備：瀏覽器沒判斷到方向時，一律用上滑（不會壞） */
+::view-transition-new(root){
+  animation: .5s cubic-bezier(.22,1,.36,1) both page-slide-up;
 }
