@@ -647,8 +647,8 @@ footer{
 
 /* 影片作品：右側自動播放的影片（Reels 直式 9/16；橫式影片改 16/9） */
 .case-photo video{
-  width:70%;
-  aspect-ratio:9/16;
+  width:130%;
+  aspect-ratio:1/1;
   object-fit:cover;
   display:block;
   border:none;
@@ -735,13 +735,13 @@ footer{
 /* gallery / shot：作品圖庫（兩欄，.tall 可跨兩列做直式圖） */
 .gallery{
   display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:16px;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:3px;
   margin:clamp(48px,7vw,90px) 0
 }
 
 .shot{
-  aspect-ratio:4/3;
+  aspect-ratio:4/5;
   background:none;
   border:none;
   display:flex;
