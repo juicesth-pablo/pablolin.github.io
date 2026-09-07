@@ -39,7 +39,7 @@
 }
 
 html{
-  scroll-behavior:smooth
+  scroll-behavior:smooth;
 }
 
 body{
@@ -873,6 +873,12 @@ footer{
   .metrics{grid-template-columns:1fr}
   .gallery{grid-template-columns:1fr}
   .shot.tall{grid-row:auto;aspect-ratio:4/3}
+
+  /* 手機版：作品內頁影片改回滿版、取消 120% 破格與靠右，避免撐破版 */
+  .case-photo video {
+    width: 100%;
+    justify-self: stretch;
+  }
 }
 
 
