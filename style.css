@@ -623,7 +623,8 @@ footer{
 }
 
 .case-title{
-  font-size:clamp(1.8rem,7vw,3.5rem);
+  /*font-size:clamp(1.8rem,7vw,3.5rem);*/
+  font-size: clamp(32px, 6vw, 50px);
   font-weight:800;
   text-transform:uppercase;
   letter-spacing:-.03em;
@@ -642,12 +643,13 @@ footer{
   aspect-ratio:4/5;
   object-fit:contain;
   display:block;
-  border:none
+  border:none;
+  border-radius:14px;
 }
 
 /* 影片作品：右側自動播放的影片（Reels 直式 9/16；橫式影片改 16/9） */
 .case-photo video{
-  width:130%;
+  width:120%;
   aspect-ratio:1/1;
   object-fit:cover;
   display:block;
