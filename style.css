@@ -849,6 +849,17 @@ footer{
   .marquee div{font-size:10px}
   .marquee span{padding:0 16px}
 
+  /* 手機版：Selected Work 卡片間距再開大 */
+  .work-grid {
+    gap: 48px;
+  }
+
+  /* 手機版：每張卡片下方加分隔線（最後一張不加） */
+  .work-card:not(:last-child) {
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--line);
+  }
+
   /* About / Experience：收成單欄；長文改左對齊比較好讀 */
   .about-grid{grid-template-columns:1fr}
   .exp-row{grid-template-columns:1fr;gap:6px}
