@@ -90,7 +90,7 @@ document.addEventListener("keydown", (e) => {
 
 
 /* ===== 作品內頁：往下滑時，導覽列顯示目前作品標題 ===== */
-const caseTitle = document.querySelector(".case-title");
+const caseTitle = document.querySelector(".case-title, .cw-title");
 const navBar = document.querySelector("nav");
 if (caseTitle && navBar) {
   // 自動用大標文字建立導覽列標題（免手動改各頁 HTML）

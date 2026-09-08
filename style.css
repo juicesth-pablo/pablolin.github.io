@@ -1043,7 +1043,7 @@ footer{
 
     /* Copywriting 內頁手機版：banner 裁切對齊中間偏上（依你的圖調整） */
   .cw-hero-media img{
-    object-position:center 30%;
+    object-position:center 35% 50%;
   }
 }
 
