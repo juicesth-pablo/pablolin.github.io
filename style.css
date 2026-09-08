@@ -870,8 +870,12 @@ footer{
   nav ul{display:flex;gap:14px;font-size:11px;letter-spacing:.06em}
   nav .mark{font-size:14px}
 
-  /* 首頁 HERO：取消滿版高度、縮上方間距、收成單欄、照片縮小置中 */
-  header{min-height:auto;padding-top:clamp(80px,12vh,110px);padding-bottom:12px}
+  /* 首頁 HERO（手機版）：加大與選單列距離、下方留白對齊跑馬燈下方間距 */
+  header{
+    min-height:auto;
+    padding-top:clamp(100px, 16vh, 140px);   /* ① 小標離選單列更遠，隨螢幕高度等比縮放 */
+    padding-bottom:var(--space-xl);          /* ② 跑馬燈「上方」間距 = 下方 #work 的 padding-top，兩邊一致又同步縮放 */
+  }
   
   /* 手機版 HERO 排序：小標 → 照片 → 姓名 → 職稱 */
   .hero-grid{
