@@ -933,7 +933,13 @@ footer{
 
   /* 作品內頁：hero 與內文收成單欄、圖片置中 */
   .case-hero-grid{grid-template-columns:1fr;gap:28px}
-  .case-photo video{max-width:300px;margin:0 auto}
+    /* 手機版：作品內頁影片加寬一點、隨螢幕等比縮放、置中 */
+  .case-photo video{
+    width:88%;         /* 主要調整鈕：想更寬就把這個 % 加大（例如 92%） */
+    max-width:400px;   /* 大手機上的安全上限，避免過寬 */
+    margin:0 auto;
+  }
+  
   .case-body{grid-template-columns:1fr;gap:14px}
   /* 手機版：單欄要用 minmax(0,1fr)，格子才不會被大圖撐破 */
   .gallery{grid-template-columns:minmax(0,1fr)}
