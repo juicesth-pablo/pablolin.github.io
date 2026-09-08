@@ -112,3 +112,22 @@ if (caseTitle && navBar) {
   }, { rootMargin: "-64px 0px 0px 0px", threshold: 0 });
   titleWatcher.observe(caseTitle);
 }
+
+
+/* ===== Copywriting 頁：滿版 banner 隨捲動淡出，露出底色 ===== */
+const cwHero = document.querySelector(".cw-hero");
+if (cwHero) {
+  const cwMedia = cwHero.querySelector(".cw-hero-media");
+  const cwCaption = cwHero.querySelector(".cw-hero-caption");
+
+  const onCwScroll = () => {
+    const h = cwHero.offsetHeight || 1;
+    const progress = Math.min(window.scrollY / h, 1);   // 0（頂端）→ 1（捲過一屏）
+    const opacity = 1 - progress;
+    if (cwMedia) cwMedia.style.opacity = opacity;
+    if (cwCaption) cwCaption.style.opacity = opacity;    // 文字一起淡出；想「只淡圖、文字留著」就刪這行
+  };
+
+  window.addEventListener("scroll", onCwScroll, { passive: true });
+  onCwScroll();
+}
