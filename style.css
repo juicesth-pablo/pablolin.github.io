@@ -82,12 +82,12 @@ a{
 /* 固定在頂端的浮動膠囊，毛玻璃效果 */
 nav{
   position:fixed;
-  top:16px;
+  top:clamp(12px, 1.6vw, 16px);          /* 上方距離也隨螢幕微縮，手機更貼近頂端 */
   left:0;
   right:0;
   z-index:50;
-  width:calc(100% - 32px);
-  max-width:1200px;
+  width:calc(100% - clamp(24px, 5vw, 128px));  /* 左右留白隨螢幕等比縮放，取代固定 32px */
+  max-width:1600px;                            /* 對齊內容容器 .wrap 的最大寬 */
   margin:0 auto;
   display:flex;
   align-items:center;
