@@ -858,8 +858,8 @@ footer{
   inset:0;
   will-change:opacity;
   /* 下半部柔和淡出成透明 → 融進 --paper，自然無縫、不變暗 */
-  -webkit-mask-image:linear-gradient(to bottom, #000 50%, transparent 96%);
-          mask-image:linear-gradient(to bottom, #000 50%, transparent 96%);
+  -webkit-mask-image:linear-gradient(to bottom, #000 55%, transparent 96%);
+          mask-image:linear-gradient(to bottom, #000 55%, transparent 96%);
 }
 
 .cw-hero-media img{
