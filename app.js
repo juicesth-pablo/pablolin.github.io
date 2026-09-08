@@ -17,17 +17,36 @@ if (location.hash === "#work") {
 }
 
 
-// Scroll reveal — adds .in when an element scrolls into view
+/* ===== 捲動進場動畫：元素進入畫面時加上 .in ===== */
 const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  entries.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
   });
 }, { threshold: 0.15 });
 
-
-document.querySelectorAll('.reveal').forEach((el, i) => {
-  el.style.transitionDelay = (i % 3) * 0.08 + 's';
+document.querySelectorAll(".reveal").forEach((el, i) => {
+  el.style.transitionDelay = (i % 3) * 0.08 + "s";
   io.observe(el);
+});
+
+
+/* ===== 首頁選單：點 Work / About / Contact 讓對應區塊在畫面置中 ===== */
+document.querySelectorAll('nav a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const id = link.getAttribute("href").slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;                         // 找不到就交回預設行為
+    e.preventDefault();
+
+    if (id === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });   // 點名字回到最頂
+    } else {
+      // 區塊比螢幕矮 → 垂直置中；比螢幕高（如手機版作品列）→ 對齊頂端（靠 scroll-margin-top 留白）
+      const fits = target.offsetHeight < window.innerHeight - 40;
+      target.scrollIntoView({ behavior: "smooth", block: fits ? "center" : "start" });
+    }
+    history.pushState(null, "", "#" + id);       // 更新網址但不跳動
+  });
 });
 
 
@@ -57,7 +76,6 @@ window.addEventListener("pagereveal", (e) => {
 document.querySelectorAll(".backlink").forEach((link) => {
   link.addEventListener("click", () => {
     sessionStorage.setItem("vtDir", "back");   // 標記下滑，交給上面的 pagereveal 讀
-    // 不攔截：照 href="../index.html#work" 正常跳回首頁
   });
 });
 
@@ -66,6 +84,26 @@ document.querySelectorAll(".backlink").forEach((link) => {
 document.addEventListener("keydown", (e) => {
   if (e.key !== "Escape") return;
   if (!document.querySelector(".backlink")) return;  // 只在作品內頁生效
-  sessionStorage.setItem("vtDir", "back");           // 標記下滑
-  location.href = "../index.html#work";              // 一律回首頁作品區
+  sessionStorage.setItem("vtDir", "back");
+  location.href = "../index.html#work";
 });
+
+
+/* ===== 作品內頁：往下滑時，導覽列顯示目前作品標題 ===== */
+const caseTitle = document.querySelector(".case-title");
+const navBar = document.querySelector("nav");
+if (caseTitle && navBar) {
+  // 自動用大標文字建立導覽列標題（免手動改各頁 HTML）
+  const navTitle = document.createElement("span");
+  navTitle.className = "nav-title";
+  navTitle.textContent = caseTitle.textContent.trim();
+  navBar.appendChild(navTitle);
+
+  // 大標滑出畫面才顯示，避免和大標同時出現；-64px 扣掉固定導覽列高度
+  const titleWatcher = new IntersectionObserver((entries) => {
+    entries.forEach((en) => {
+      navBar.classList.toggle("show-title", !en.isIntersecting);
+    });
+  }, { rootMargin: "-64px 0px 0px 0px", threshold: 0 });
+  titleWatcher.observe(caseTitle);
+}

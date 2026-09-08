@@ -30,6 +30,12 @@
   --display:"Helvetica Neue",Helvetica,Arial,sans-serif;
   --serif:Georgia,"Times New Roman",serif;
   --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+    /* 流動間距系統：手機最小值 → 隨螢幕等比放大 → 約 1600px 一起觸頂維持一致 */
+  --space-sm:  clamp(18px, 1.75vw, 28px);
+  --space-md:  clamp(28px, 3vw, 48px);
+  --space-lg:  clamp(40px, 4vw, 64px);
+  --space-xl:  clamp(72px, 9vw, 144px);
+  --space-2xl: clamp(110px, 13vw, 208px);
 }
 
 *{
@@ -114,11 +120,34 @@ nav a:hover{
   opacity:.55
 }
 
+/* 內頁導覽列標題：預設隱藏，往下滑、大標消失後才淡入 */
+.nav-title{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--ink);
+  font-weight:700;
+  opacity:0;
+  transform:translateY(-4px);
+  transition:opacity .4s ease, transform .4s ease;
+  pointer-events:none;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:60vw;
+}
+
+nav.show-title .nav-title{
+  opacity:1;
+  transform:none;
+}
+
 
 /* ============ 03. 首頁 HERO ============ */
 /* header：整個首屏，內容靠上排列 */
 header{
-  min-height:100svh;
+  min-height:min(100svh, 900px);
   display:flex;
   flex-direction:column;
   justify-content:flex-start;
@@ -276,14 +305,15 @@ h1 em{
 /* ============ 05. 區塊通用 ============ */
 /* section：各大區塊的上下間距；sec-head：區塊編號 + 標題 */
 section{
-  padding:clamp(70px,11vw,150px) 0
+  padding:var(--space-xl) 0;
+  scroll-margin-top:90px
 }
 
 .sec-head{
   display:flex;
   align-items:baseline;
   gap:16px;
-  margin-bottom:clamp(34px,5vw,64px)
+  margin-bottom:var(--space-lg);
 }
 
 .sec-head .no{
@@ -502,7 +532,7 @@ section{
 
 /* 收窄 Experience 到 Contact 之間的間距 */
 #experience{
-  padding-bottom:clamp(30px,5vw,60px)
+  padding-bottom:var(--space-md)
 }
 
 
@@ -510,8 +540,8 @@ section{
 /* 置中的大型 CTA「Let's talk」與社群連結 */
 .contact{
   text-align:center;
-  padding-top:clamp(120px,20vw,260px);
-  padding-bottom:clamp(100px,16vw,200px)
+  padding-top:var(--space-2xl);
+  padding-bottom:var(--space-2xl);
 }
 
 .contact .pre{
@@ -594,8 +624,8 @@ footer{
 /* ============ 11. 作品內頁 CASE STUDY ============ */
 /* case-hero / case-hero-grid：內頁頂端，左文字（含 metrics）右圖片 */
 .case-hero{
-  padding-top:clamp(70px,14vw,140px);
-  padding-bottom:clamp(110px,5.5vw,130px)
+  padding-top:var(--space-xl);
+  padding-bottom:var(--space-xl);
 }
 
 .backlink{
@@ -702,9 +732,9 @@ footer{
   display:grid;
   grid-template-columns:180px 1fr;
   gap:clamp(24px,5vw,70px);
-  margin-top:clamp(10px,3vw,80px);
-  padding:clamp(20px,4vw,40px) 0;
-  border-top:1px solid var(--line)
+  margin-top:var(--space-md);
+  padding:var(--space-sm) 0;
+  border-top:1px solid var(--line);
 }
 
 .case-body:last-of-type{
@@ -739,7 +769,7 @@ footer{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:3px;
-  margin:clamp(48px,7vw,90px) 0
+  margin:var(--space-xl) 0;
 }
 
 .shot{
@@ -773,8 +803,8 @@ footer{
 /* next-proj：內頁底部「下一個專案」導引 */
 .next-proj{
   border-top:1px solid var(--ink);
-  padding:clamp(50px,8vw,90px) 0;
-  text-align:center
+  padding:var(--space-xl) 0;
+  text-align:center;
 }
 
 .next-proj .pre{
