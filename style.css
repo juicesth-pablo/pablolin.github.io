@@ -36,6 +36,8 @@
   --space-lg:  clamp(40px, 4vw, 64px);
   --space-xl:  clamp(72px, 9vw, 144px);
   --space-2xl: clamp(110px, 13vw, 208px);
+  /* 作品內頁標題區的上方留白（可獨立微調，隨螢幕等比縮放） */
+  --case-hero-top: clamp(96px, 11vw, 180px);
 }
 
 *{
@@ -625,8 +627,8 @@ footer{
 /* ============ 11. 作品內頁 CASE STUDY ============ */
 /* case-hero / case-hero-grid：內頁頂端，左文字（含 metrics）右圖片 */
 .case-hero{
-  padding-top:var(--space-xl);
-  padding-bottom:var(--space-xl);
+  padding-top:var(--case-hero-top);
+  padding-bottom:var(--space-xl)
 }
 
 .backlink{
