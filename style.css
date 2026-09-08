@@ -872,10 +872,38 @@ footer{
 
   /* 首頁 HERO：取消滿版高度、縮上方間距、收成單欄、照片縮小置中 */
   header{min-height:auto;padding-top:clamp(80px,12vh,110px);padding-bottom:12px}
-  .hero-grid{grid-template-columns:1fr;gap:34px}
-  .hero-photo{max-width:200px;margin:24px auto 0}
+  
+  /* 手機版 HERO 排序：小標 → 照片 → 姓名 → 職稱 */
+  .hero-grid{
+    grid-template-columns:1fr;
+    gap:0;                    /* 改由各元素自己的 margin 控距，避免和 gap 疊加 */
+  }
+
+  .hero-text{
+    display:contents;         /* 外框消失，內部元素直接參與 grid 排序 */
+  }
+
+  .eyebrow{
+    order:1;                  /* 小標最上面（保留自身的下方間距） */
+    display:inline-block;font-size:8px;
+  }
+
+  .hero-photo{
+    order:2;
+    max-width:200px;
+    margin:0 0 24px;          /* 靠左 + 與姓名的距離 */
+    justify-self:start;       /* grid 成員靠左對齊 */
+  }
+
+  h1{
+    order:3;                  /* 姓名 */
+  }
+
+  .hero-meta{
+    order:4;                  /* 職稱（保留自身的上方間距） */
+  }
+
   h1 .row{display:inline-block}      /* 大標在手機並成一行 */
-  .eyebrow{display:inline-block;font-size:8px}
   .scroll-cue{display:none}          /* 手機隱藏 Scroll 提示 */
 
   /* 跑馬燈：縮小字級與高度 */
@@ -901,20 +929,19 @@ footer{
 
   /* 作品內頁：hero 與內文收成單欄、圖片置中 */
   .case-hero-grid{grid-template-columns:1fr;gap:28px}
-  .case-photo img{max-width:420px;margin:0 auto}
   .case-photo video{max-width:300px;margin:0 auto}
   .case-body{grid-template-columns:1fr;gap:14px}
-  .metrics{grid-template-columns:1fr}
   /* 手機版：單欄要用 minmax(0,1fr)，格子才不會被大圖撐破 */
   .gallery{grid-template-columns:minmax(0,1fr)}
   /* grid 項目預設 min-width:auto 會被圖片撐開，強制歸零 */
   .shot{min-width:0}
   .shot.tall{grid-row:auto;aspect-ratio:4/3}
 
-  /* 手機版：作品內頁照片調整，避免撐破版 */
-  .case-photo img {
-    width: 90%;
-    justify-self: stretch;
+  /* 手機版：作品內頁照片置中、限制最大寬避免破版 */
+  .case-photo img{
+    width:90%;
+    max-width:420px;
+    margin:0 auto;
   }
 }
 
