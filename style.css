@@ -637,7 +637,7 @@ footer{
   color:var(--muted);
   display:inline-flex;
   gap:8px;
-  margin-bottom:40px
+  margin-bottom:var(--space-md);
 }
 
 .backlink:hover{
@@ -650,7 +650,7 @@ footer{
   letter-spacing:.1em;
   color:var(--accent);
   text-transform:uppercase;
-  margin-bottom:20px
+  margin-bottom:var(--space-sm);
 }
 
 .case-title{
@@ -696,7 +696,7 @@ footer{
   gap:14px 48px;
   background:none;
   border:none;
-  margin:clamp(20px,4vw,40px) 0 0
+  margin:var(--space-sm) 0 0;
 }
 
 .stat{
@@ -762,7 +762,7 @@ footer{
 }
 
 .case-body p+p{
-  margin-top:18px
+  margin-top:var(--space-sm);
 }
 
 /* gallery / shot：作品圖庫（兩欄，.tall 可跨兩列做直式圖） */
@@ -815,7 +815,7 @@ footer{
   letter-spacing:.24em;
   text-transform:uppercase;
   color:var(--muted);
-  margin-bottom:18px
+  margin-bottom:var(--space-sm);
 }
 
 .next-proj a{
