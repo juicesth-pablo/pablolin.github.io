@@ -655,9 +655,15 @@ footer{
   margin-bottom:var(--space-sm);
 }
 
+/* 讓左欄成為「量測容器」，標題依左欄寬度縮放，不影響右邊影片 */
+.case-hero-text{
+  container-type:inline-size;   /* 宣告這欄是容器，寬度由 grid 比例決定 */
+  min-width:0;                  /* 允許左欄照 1.3fr 縮放，不被標題撐寬 */
+}
+
 .case-title{
-  /*font-size:clamp(1.8rem,7vw,3.5rem);*/
-  font-size: clamp(32px, 6vw, 50px);
+  font-size:clamp(20px, 6cqi, 48px);   /* cqi = 左欄寬度的百分比，不是螢幕 */
+  white-space:nowrap;
   font-weight:800;
   text-transform:uppercase;
   letter-spacing:-.03em;
@@ -715,10 +721,10 @@ footer{
 }
 
 .stat .num em{
-  font-family:var(--serif);
+  font-family:var(--display);
   font-style:normal;
   color:var(--accent);
-  font-weight:400
+  font-weight:800
 }
 
 .stat .lbl{
@@ -736,7 +742,7 @@ footer{
   grid-template-columns:180px 1fr;
   gap:clamp(24px,5vw,70px);
   margin-top:var(--space-md);
-  padding:var(--space-sm) 0;
+  padding:var(--space-lg) 0;
   border-top:1px solid var(--line);
 }
 
@@ -773,6 +779,11 @@ footer{
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:3px;
   margin:var(--space-xl) 0;
+}
+
+/* 方形圖庫：加上 .gallery-square 的頁面，圖片變 1:1 */
+.gallery-square .shot, .gallery-square .shot img{
+  aspect-ratio:1/1;
 }
 
 .shot{
