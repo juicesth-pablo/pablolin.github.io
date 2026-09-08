@@ -46,6 +46,7 @@
 
 html{
   scroll-behavior:smooth;
+  overflow-x:hidden;
 }
 
 body{
@@ -796,6 +797,7 @@ footer{
 .shot img{
   width:100%;
   height:100%;
+  max-width:100%;   /* ← 加這行，圖片永遠不超過容器 */
   object-fit:cover;
   display:block
 }
@@ -901,7 +903,10 @@ footer{
   .case-photo video{max-width:300px;margin:0 auto}
   .case-body{grid-template-columns:1fr;gap:14px}
   .metrics{grid-template-columns:1fr}
-  .gallery{grid-template-columns:1fr}
+  /* 手機版：單欄要用 minmax(0,1fr)，格子才不會被大圖撐破 */
+  .gallery{grid-template-columns:minmax(0,1fr)}
+  /* grid 項目預設 min-width:auto 會被圖片撐開，強制歸零 */
+  .shot{min-width:0}
   .shot.tall{grid-row:auto;aspect-ratio:4/3}
 
   /* 手機版：作品內頁照片調整，避免撐破版 */

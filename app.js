@@ -96,7 +96,12 @@ if (caseTitle && navBar) {
   // 自動用大標文字建立導覽列標題（免手動改各頁 HTML）
   const navTitle = document.createElement("span");
   navTitle.className = "nav-title";
-  navTitle.textContent = caseTitle.textContent.trim();
+  // 標題若用 <br> 換行，textContent 會把前後段黏在一起 → 先把 <br> 換成空格
+  navTitle.textContent = caseTitle.innerHTML
+  .replace(/<br\s*\/?>/gi, " ")   // <br> / <br/> / <br /> 一律換成空格
+  .replace(/<[^>]+>/g, "")        // 去掉其餘標籤（保險）
+  .replace(/\s+/g, " ")           // 多個空白收成一個
+  .trim();
   navBar.appendChild(navTitle);
 
   // 大標滑出畫面才顯示，避免和大標同時出現；-64px 扣掉固定導覽列高度
