@@ -1149,7 +1149,7 @@ footer{
   /* 標題：手機也維持單行，字級依容器寬度等比縮放（cqi），長標題自動變小不換行 */
   .cw-title.oneline{
     white-space:nowrap;
-    font-size:clamp(18px, 6cqi, 40px);
+    font-size:clamp(22px, 6cqi, 44px);
   }
 
   /* metrics：手機維持三欄一行，縮小字級與欄距塞得下 */
