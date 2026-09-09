@@ -1137,7 +1137,7 @@ footer{
     transform:translateX(50%);
     bottom:auto;
     top:clamp(80px, 12vh, 120px);
-    height:min(48svh, 68vw);
+    height:min(70svh, 90vw);
   }
 
   /* split 版手機：文字容器撐滿，但保留 inline-size 容器，標題才能用 cqi 縮放 */
