@@ -106,10 +106,31 @@ nav{
   transition:color .4s ease, background-color .4s ease, border-color .4s ease;
 }
 
+/* 疊在深色區塊上時，只翻文字顏色，背景/邊框維持原本毛玻璃 */
 nav.nav-light{
   color:var(--paper);
+}
+
+
+/* ===== 單頁深色主題（套在 <body class="theme-dark"> 的頁面）===== */
+/* 翻轉設計變數：底色轉黑、文字轉白，次要色與分隔線一起反過來 */
+body.theme-dark{
+  --paper:#1a1a1b;   /* 底色改黑（banner 會淡出成黑，與深照片無縫）*/
+  --ink:#F0EEE9;     /* 主要文字翻白 */
+  --muted:#9c968b;   /* 次要文字：黑底上調亮才看得清 */
+  --line:#33302b;    /* 分隔線：黑底上的低調線 */
+  /* --accent 橄欖綠不變，深淺底都適用 */
+}
+
+/* 導覽列：深色頁改用深色毛玻璃（文字已由 --ink 自動翻白）*/
+body.theme-dark nav{
   background:rgba(26,26,27,.3);
   border-color:rgba(255,255,255,.2);
+}
+
+/* 內文段落原本用寫死的深色 #37332c，深色頁改成淺色 */
+body.theme-dark .case-body p{
+  color:#cbc5ba;
 }
 
 nav .mark{
