@@ -38,6 +38,8 @@
   --space-2xl: clamp(110px, 13vw, 208px);
   /* 作品內頁標題區的上方留白（可獨立微調，隨螢幕等比縮放） */
   --case-hero-top: clamp(96px, 11vw, 180px);
+  /* Reels split hero：左右到邊界的間距（左右一致、隨螢幕等比縮放）*/
+  --cw-edge:clamp(24px, 5vw, 64px);
 }
 
 *{
@@ -100,7 +102,14 @@ nav{
   -webkit-backdrop-filter:blur(3px) saturate(1.4);
   border:1px solid rgba(255,255,255,.55);
   box-shadow:0 6px 24px rgba(26,26,27,.08);
-  color:var(--ink)
+  color:var(--ink);
+  transition:color .4s ease, background-color .4s ease, border-color .4s ease;
+}
+
+nav.nav-light{
+  color:var(--paper);
+  background:rgba(26,26,27,.3);
+  border-color:rgba(255,255,255,.2);
 }
 
 nav .mark{
@@ -850,6 +859,7 @@ footer{
   color:var(--accent)
 }
 
+
 /* ===== Copywriting 頁專用：滿版 Banner Hero ===== */
 /* 滿版一整屏；背景色就是圖片淡出後會露出的顏色 */
 .cw-hero{
@@ -883,7 +893,7 @@ footer{
   bottom:0;
   width:100%;
   max-width:1600px;
-  padding:clamp(24px,5vw,64px);
+  padding:var(--cw-edge);
   color:var(--ink);
 }
 
@@ -914,6 +924,63 @@ footer{
   line-height:1.4;
   color:var(--ink);
   max-width:36ch;
+}
+
+
+/* ===== cw-hero「左文字 / 右直式影片」版（Reels 頁）===== */
+/* 右側清晰直式影片 */
+.cw-hero-video{
+  position:absolute;
+  right:var(--cw-edge);
+  bottom:var(--cw-edge);
+  height:min(78svh, 88vw);      /* 64svh → 80svh，從右下角放大 */
+  aspect-ratio:9/16;
+  object-fit:cover;
+  border-radius:16px;
+  box-shadow:0 14px 36px rgba(0,0,0,.4);
+  z-index:2;
+}
+
+/* split 版：文字容器縮到左側，並成為「量測容器」讓標題單行縮放 */
+.cw-hero--split .cw-hero-caption{
+  width:min(62vw, 860px);      /* 原本 48vw/600 → 給標題更多空間 */
+  max-width:none;
+  container-type:inline-size;
+}
+
+.cw-title.oneline{
+  white-space:nowrap;
+  font-size:clamp(30px, 8cqi, 62px);   /* 上限 46 → 58，桌機明顯變大 */
+}
+
+/* split 版遮罩：緩動漸層整體下移 → 背景多露、淡出集中在底部 */
+.cw-hero--split .cw-hero-media{
+  -webkit-mask-image:linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 52%,
+    rgba(0,0,0,0.94) 58%,
+    rgba(0,0,0,0.82) 64%,
+    rgba(0,0,0,0.65) 70%,
+    rgba(0,0,0,0.45) 76%,
+    rgba(0,0,0,0.26) 82%,
+    rgba(0,0,0,0.12) 88%,
+    rgba(0,0,0,0.04) 94%,
+    transparent 100%
+  );
+  mask-image:linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 52%,
+    rgba(0,0,0,0.94) 58%,
+    rgba(0,0,0,0.82) 64%,
+    rgba(0,0,0,0.65) 70%,
+    rgba(0,0,0,0.45) 76%,
+    rgba(0,0,0,0.26) 82%,
+    rgba(0,0,0,0.12) 88%,
+    rgba(0,0,0,0.04) 94%,
+    transparent 100%
+  );
 }
 
 
@@ -1041,6 +1108,25 @@ footer{
   /* Copywriting 內頁手機版：banner 裁切對齊中間偏上（依你的圖調整） */
   .cw-hero-media img{
     object-position:35% 50%;
+  }
+
+  /* split 版手機:影片置中偏上、文字置底、標題可換行 */
+  .cw-hero-video{
+    right:50%;
+    transform:translateX(50%);
+    bottom:auto;
+    top:clamp(80px, 12vh, 120px);
+    height:min(48svh, 68vw);
+  }
+
+  .cw-hero--split .cw-hero-caption{
+    width:100%;
+    container-type:normal;
+  }
+
+  .cw-title.oneline{
+    white-space:normal;      /* 手機允許換行，避免字被壓太小 */
+    font-size:clamp(26px, 8vw, 44px);
   }
 }
 

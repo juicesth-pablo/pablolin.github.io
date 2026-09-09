@@ -114,20 +114,36 @@ if (caseTitle && navBar) {
 }
 
 
-/* ===== Copywriting 頁：滿版 banner 隨捲動淡出，露出底色 ===== */
+/* ===== Copywriting / split 頁：滿版媒體隨捲動淡出，露出底色 ===== */
 const cwHero = document.querySelector(".cw-hero");
 if (cwHero) {
   const cwMedia = cwHero.querySelector(".cw-hero-media");
   const cwCaption = cwHero.querySelector(".cw-hero-caption");
+  const cwVideo = cwHero.querySelector(".cw-hero-video");
 
   const onCwScroll = () => {
     const h = cwHero.offsetHeight || 1;
     const progress = Math.min(window.scrollY / h, 1);   // 0（頂端）→ 1（捲過一屏）
     const opacity = 1 - progress;
     if (cwMedia) cwMedia.style.opacity = opacity;
-    if (cwCaption) cwCaption.style.opacity = opacity;    // 文字一起淡出；想「只淡圖、文字留著」就刪這行
+    if (cwCaption) cwCaption.style.opacity = opacity;
+    if (cwVideo) cwVideo.style.opacity = opacity;        // ← 移進函式內，跟其他兩行一起
   };
 
   window.addEventListener("scroll", onCwScroll, { passive: true });
   onCwScroll();
+}
+
+
+/* ===== 導覽列：疊在深色區塊上時自動改淺色（全站，過渡交給 CSS transition）===== */
+const navEl = document.querySelector("nav");
+// 只有真正深底的區塊才會被標記，跟版型無關
+const darkZones = document.querySelectorAll(".nav-dark-zone");
+if (navEl && darkZones.length) {
+  const navColorWatch = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      navEl.classList.toggle("nav-light", e.isIntersecting);
+    });
+  }, { rootMargin: "-56px 0px -100% 0px", threshold: 0 });
+  darkZones.forEach((z) => navColorWatch.observe(z));
 }
