@@ -1140,14 +1140,31 @@ footer{
     height:min(48svh, 68vw);
   }
 
+  /* split 版手機：文字容器撐滿，但保留 inline-size 容器，標題才能用 cqi 縮放 */
   .cw-hero--split .cw-hero-caption{
     width:100%;
-    container-type:normal;
+    /* 不要覆寫 container-type，沿用桌機的 inline-size */
   }
 
+  /* 標題：手機也維持單行，字級依容器寬度等比縮放（cqi），長標題自動變小不換行 */
   .cw-title.oneline{
-    white-space:normal;      /* 手機允許換行，避免字被壓太小 */
-    font-size:clamp(26px, 8vw, 44px);
+    white-space:nowrap;
+    font-size:clamp(18px, 6cqi, 40px);
+  }
+
+  /* metrics：手機維持三欄一行，縮小字級與欄距塞得下 */
+  .metrics{
+    flex-wrap:nowrap;
+    gap:10px 16px;
+  }
+
+  .metrics .num{
+    font-size:13px;
+  }
+
+  .metrics .lbl{
+    font-size:11px;
+    line-height:1.25;
   }
 }
 
