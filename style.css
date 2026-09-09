@@ -1122,7 +1122,7 @@ footer{
 
   /* Copywriting 內頁手機版：banner 裁切對齊中間偏上（依你的圖調整） */
   .cw-hero-media img{
-    object-position:80% 50%;
+    object-position:45% 50%;
   }
 
   /* split 版手機:影片置中偏上、文字置底、標題可換行 */
