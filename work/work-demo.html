@@ -1,80 +1,95 @@
 <!DOCTYPE html>
+<!-- ===================================================================
+     作品內頁範本 —— 複製這份、改掉所有【】標記處即可
+     內建：分割式 hero、影片延後載入、漸層、預渲染、RWD、深色主題選項
+     資產命名慣例：images/【專案slug】/、videos/【專案slug】/
+==================================================================== -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AREA 02 x Jet Chang · Pablo Lin</title>
-<!-- This page is in /work, so css/js use ../ to go up one level -->
+<!-- 【瀏覽器分頁標題】 -->
+<title>【專案標題】 · Pablo Lin</title>
+<!-- 本頁在 /work，css/js 用 ../ 回上一層 -->
 <link rel="stylesheet" href="../style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23929910'/></svg>">
 </head>
+
+<!-- 深色主題頁：把下行改成 <body class="theme-dark">；淺色頁維持 <body> -->
 <body>
 
 <nav>
   <a href="../index.html" class="mark">Pablo Lin</a>
 </nav>
 
-<section class="case-hero">
-  <div class="wrap case-hero-grid">
-    <div class="case-hero-text">
-      <a href="../index.html#work" class="backlink">← Back to Work</a>
-      <div class="case-tags reveal">Influencer &amp; KOL · 2024</div>
-      <h1 class="case-title reveal">AREA 02 x The Knights</h1>
-      <div class="metrics reveal">
-        <div class="stat"><div class="num"><em>+ 34 %</em></div><div class="lbl">Views growth</div></div>
-        <div class="stat"><div class="num"><em>62 K</em></div><div class="lbl">Peak reach</div></div>
-        <div class="stat"><div class="num"><em>+ 36 %</em></div><div class="lbl">Engagement lift</div></div>
-      </div>
-    </div>
-    <div class="case-photo reveal">
-      <img src="../images/area02-the-knights/area02-the-knights-cover.jpg" alt="AREA 02 x The Knights">
+<!-- ===== HERO：固定 banner 背景 + 右側直式影片 + 左側文字 ===== -->
+<section class="cw-hero cw-hero--split">
+
+  <!-- 背景 banner（滿版、底部自動漸層淡出）
+       構圖提醒：左下角留乾淨，文字才好讀 -->
+  <div class="cw-hero-media">
+    <img src="../images/【專案slug】/【專案slug】-banner.webp" alt="">
+  </div>
+
+  <!-- 右側直式影片（延後載入：先顯示 poster，頁面就緒後才串流）
+       ★ 無影片的頁面：把整個 <video> 刪掉即可，其餘不用動 -->
+  <video class="cw-hero-video"
+    muted loop playsinline
+    preload="none"
+    poster="../images/【專案slug】/【專案slug】-still.webp"
+    data-src="../videos/【專案slug】/【專案slug】-hero-video.mp4"></video>
+
+  <!-- 左側文字容器 -->
+  <div class="cw-hero-caption">
+    <a href="../index.html#work" class="backlink">← Back to Work</a>
+    <div class="case-tags">【分類 · 年份，例：Reels · Influencer &amp; KOL · 2026】</div>
+    <h1 class="cw-title oneline">【專案標題】</h1>
+
+    <!-- 成效數字（沒有的話整個 <div class="metrics"> 刪掉）-->
+    <div class="metrics">
+      <div class="stat"><div class="num"><em>【+34%】</em></div><div class="lbl">【Views growth】</div></div>
+      <div class="stat"><div class="num"><em>【62K】</em></div><div class="lbl">【Peak reach】</div></div>
+      <div class="stat"><div class="num"><em>【+36%】</em></div><div class="lbl">【Engagement lift】</div></div>
     </div>
   </div>
 </section>
 
+<!-- ===== 內文區塊：每個 .case-body 是一段（左小標、右內容）=====
+     需要幾段就複製幾個 .case-body；第一段以後上下分隔線會自動對稱 -->
 <div class="wrap">
   <div class="case-body reveal">
     <h3>Overview</h3>
     <div>
-      <p>AREA 02 是台灣的潮流／球鞋交易平台。我從 2023 年加入，負責把社群從單純的「互動經營」逐步轉型成能實際帶動網站流量與成交的成長引擎。這個作品記錄兩個階段的策略轉變。</p>
-      <p>[ 換成你的話：品牌背景、你接手時的狀態、你想達成的目標。 ]</p>
+      <p>【第一段內文。段落間換行用 <br><br>。需要粗體用 <strong>重點</strong>。】</p>
     </div>
   </div>
 
+  <!-- 需要更多段就複製這一塊，改標題與內文
   <div class="case-body reveal">
-    <h3>Phase 01 — Specialist</h3>
+    <h3>【小標，例：Approach】</h3>
     <div>
-      <p><b>2023.07 — 2025.04</b>　打底期：專注社群渠道的互動經營與粉絲成長，負責圖文編排與文案撰寫，建立品牌在潮流社群的聲量與內容調性。</p>
-      <p>[ 補充：你做了哪些內容、成長了多少、哪些貼文表現最好。 ]</p>
+      <p>【內文】</p>
     </div>
   </div>
-
-  <div class="case-body reveal">
-    <h3>Phase 02 — Supervisor</h3>
-    <div>
-      <p><b>2025.11 — Now</b>　升級期：新增網站流量增長與導購轉換的目標，負責社群策略制定、擔任外部廠商洽談窗口、主導社群企劃，並帶領一人團隊執行。</p>
-      <p>[ 補充：你制定了什麼策略、談了哪些合作、轉換成效如何。 ]</p>
-    </div>
-  </div>
-
-  <div class="case-body reveal">
-    <h3>Result</h3>
-    <div>
-      <p>[ 換成真實成果：粉絲／流量／轉換的具體變化，以及你帶來的關鍵轉折。用數字說話最有力。 ]</p>
-    </div>
-  </div>
+  -->
 </div>
 
+<!-- ===== 圖庫（可選，不需要就整段刪掉）=====
+     預設 3 欄、4:5 直式圖。
+     想要 1:1 方形圖 → 把 class 改成 "gallery gallery-square reveal" -->
 <div class="wrap">
   <div class="gallery reveal">
-    <div class="shot"><img src="../images/area02-jet-chang/jet-chang-2.png" alt="AREA 02 x Jet Chang — still"></div>
+    <div class="shot"><img src="../images/【專案slug】/【專案slug】-1.webp" alt="【專案標題】 — 1" loading="lazy" decoding="async"></div>
+    <div class="shot"><img src="../images/【專案slug】/【專案slug】-2.webp" alt="【專案標題】 — 2" loading="lazy" decoding="async"></div>
+    <div class="shot"><img src="../images/【專案slug】/【專案slug】-3.webp" alt="【專案標題】 — 3" loading="lazy" decoding="async"></div>
   </div>
 </div>
 
+<!-- ===== 下一個專案：連到下一頁 ===== -->
 <div class="next-proj">
   <div class="wrap">
     <div class="pre">Next Project</div>
-    <a href="price-test.html">AREA 02 Street Interviews →</a>
+    <a href="【下一頁檔名.html】">【下一個專案標題】 →</a>
   </div>
 </div>
 

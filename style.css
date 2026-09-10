@@ -178,6 +178,64 @@ nav.show-title .nav-title{
 
 
 /* ============ 03. 首頁 HERO ============ */
+/* ===== 首頁 HERO 滑鼠互動背景：柔色團塊流動 + 波動 ===== */
+/* 容器：鋪滿 hero、墊在內容底下、裁掉溢出的柔邊、不擋滑鼠 */
+.hero-fx{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+/* 讓 hero 內容浮在效果之上 */
+header > .wrap{
+  position:relative;
+  z-index:1;
+}
+
+/* scroll 提示維持原本的左下角絕對定位，只補 z-index 疊到效果上面 */
+.scroll-cue{
+  z-index:1;
+}
+
+/* 柔色團塊：淺底上用 multiply 才吃得出顏色 */
+.hero-fx .blob{
+  position:absolute;
+  width:52vw;
+  height:52vw;
+  border-radius:50%;
+  filter:blur(55px);
+  opacity:.9;
+  mix-blend-mode:multiply;   /* ← 關鍵：淺底染色、重疊加深混色 */
+  will-change:transform;
+  transform:translate(-50%, -50%);
+}
+
+/* 三團顏色加濃一點，配合 multiply 更明顯 */
+.hero-fx .blob-1{
+  left:30%;
+  top:35%;
+  background:radial-gradient(circle at center, rgba(146,153,16,.60), transparent 62%);
+}
+
+.hero-fx .blob-2{
+  left:64%;
+  top:30%;
+  background:radial-gradient(circle at center, rgba(196,120,70,.50), transparent 62%);
+}
+
+.hero-fx .blob-3{
+  left:48%;
+  top:62%;
+  background:radial-gradient(circle at center, rgba(110,130,165,.46), transparent 62%);
+}
+
+/* 尊重「減少動態」系統偏好：直接關掉 */
+@media (prefers-reduced-motion: reduce){
+  .hero-fx{ display:none; }
+}
+
 /* header：整個首屏，內容靠上排列 */
 header{
   min-height:min(100svh, 900px);

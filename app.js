@@ -187,3 +187,39 @@ if (workLinks.length) {
   if ("requestIdleCallback" in window) requestIdleCallback(run, { timeout: 3000 });
   else window.addEventListener("load", run);
 }
+
+
+/* ===== 首頁 HERO：柔色團塊背景，隨滑鼠流動 + 自體波動 ===== */
+const heroFx = document.querySelector(".hero-fx");
+const heroEl = document.getElementById("top");
+if (heroFx && heroEl && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const blobs = heroFx.querySelectorAll(".blob");
+  // 每團的視差強度(par)與波動參數(振幅 ax/ay、速度 sx/sy、相位 ph)，差異化才有層次
+  const cfg = [
+    { par: 40, ax: 22, ay: 18, sx: 0.00040, sy: 0.00055, ph: 0 },
+    { par: 26, ax: 30, ay: 20, sx: 0.00055, sy: 0.00035, ph: 2 },
+    { par: 60, ax: 18, ay: 26, sx: 0.00035, sy: 0.00060, ph: 4 },
+  ];
+  let tx = 0, ty = 0;   // 目標：滑鼠相對 hero 中心（-0.5 ~ 0.5）
+  let cx = 0, cy = 0;   // 緩動後的實際座標
+
+  heroEl.addEventListener("pointermove", (e) => {
+    const r = heroEl.getBoundingClientRect();
+    tx = (e.clientX - r.left) / r.width - 0.5;
+    ty = (e.clientY - r.top) / r.height - 0.5;
+  });
+  heroEl.addEventListener("pointerleave", () => { tx = 0; ty = 0; });  // 離開慢慢回中
+
+  const tick = (t) => {
+    cx += (tx - cx) * 0.06;   // 緩動係數：越小越「拖尾」、越流動
+    cy += (ty - cy) * 0.06;
+    blobs.forEach((b, i) => {
+      const c = cfg[i] || cfg[0];
+      const dx = cx * c.par + Math.sin(t * c.sx + c.ph) * c.ax;  // 視差(跟滑鼠) + 波動(自體)
+      const dy = cy * c.par + Math.cos(t * c.sy + c.ph) * c.ay;
+      b.style.transform = `translate(-50%, -50%) translate(${dx}px, ${dy}px)`;
+    });
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
