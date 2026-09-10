@@ -50,41 +50,35 @@ document.querySelectorAll('nav a[href^="#"]').forEach((link) => {
 });
 
 
-/* ===== 頁面切換方向：先看強制指定，否則自動判斷前進/返回 ===== */
+/* ===== 頁面切換方向 =====
+   首頁↔內頁：看目的地（內頁=上滑、首頁=下滑）
+   內頁↔內頁：看歷史方向（前進=上滑、返回=下滑）      */
 window.addEventListener("pagereveal", (e) => {
   if (!e.viewTransition) return;
 
-  // 1) Back to Work / Esc 會設「強制下滑」旗標，優先採用
-  const forced = sessionStorage.getItem("vtDir");
-  if (forced) {
-    e.viewTransition.types.add(forced);
-    sessionStorage.removeItem("vtDir");
-    return;
-  }
+  const toCase = location.pathname.includes("/work/");   // 目的地是內頁?
+  let type = toCase ? "forward" : "back";                // 預設：依目的地
 
-  // 2) 否則用 Navigation API 判斷是「返回」還是「前進」
-  if (window.navigation) {
+  // 內頁 → 內頁：改用歷史前進/返回判斷
+  if (window.navigation && navigation.activation) {
     const act = navigation.activation;
-    const isBack = act && act.navigationType === "traverse"
-      && act.from && act.entry && act.entry.index < act.from.index;
-    e.viewTransition.types.add(isBack ? "back" : "forward");
+    const fromUrl = (act.from && act.from.url) ? act.from.url : "";
+    const fromCase = fromUrl.includes("/work/");
+    if (fromCase && toCase) {
+      const isBack = act.navigationType === "traverse"
+        && act.from && act.entry && act.entry.index < act.from.index;
+      type = isBack ? "back" : "forward";
+    }
   }
+
+  e.viewTransition.types.add(type);
 });
 
 
-/* ===== Back to Work：一律回首頁 SELECTED WORK，並走下滑動畫 ===== */
-document.querySelectorAll(".backlink").forEach((link) => {
-  link.addEventListener("click", () => {
-    sessionStorage.setItem("vtDir", "back");   // 標記下滑，交給上面的 pagereveal 讀
-  });
-});
-
-
-/* ===== 作品內頁按 Esc：回首頁 SELECTED WORK（下滑動畫） ===== */
+/* ===== 作品內頁按 Esc：回首頁 SELECTED WORK ===== */
 document.addEventListener("keydown", (e) => {
   if (e.key !== "Escape") return;
   if (!document.querySelector(".backlink")) return;  // 只在作品內頁生效
-  sessionStorage.setItem("vtDir", "back");
   location.href = "../index.html#work";
 });
 
