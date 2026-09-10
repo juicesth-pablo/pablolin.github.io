@@ -158,7 +158,32 @@ if (heroVideos.length) {
     v.src = v.dataset.src;          // 這一刻才開始下載影片
     v.play().catch(() => {});       // 靜音自動播放（被擋也不報錯）
   };
-  // 等其他資源都就緒（window load）再開始拉影片
-  if (document.readyState === "complete") heroVideos.forEach(startVideo);
-  else window.addEventListener("load", () => heroVideos.forEach(startVideo));
+  const kick = () => heroVideos.forEach(startVideo);
+
+  // 若正被「預先渲染」，等頁面真正開啟後才拉影片，避免預渲染時就吃頻寬
+  if (document.prerendering) {
+    document.addEventListener("prerenderingchange", kick, { once: true });
+  } else if (document.readyState === "complete") {
+    kick();
+  } else {
+    window.addEventListener("load", kick);
+  }
+}
+
+
+/* ===== 首頁：閒置時在背景預抓作品內頁 HTML，點進去就秒開 ===== */
+const workLinks = document.querySelectorAll(".work-card[href]");
+if (workLinks.length) {
+  const prefetch = (url) => {
+    // 已經抓過就跳過，避免重複
+    if (document.querySelector(`link[rel="prefetch"][href="${url}"]`)) return;
+    const l = document.createElement("link");
+    l.rel = "prefetch";
+    l.href = url;
+    document.head.appendChild(l);
+  };
+  const run = () => workLinks.forEach((a) => prefetch(a.href));
+  // 等瀏覽器閒置再抓，不跟首頁的圖片/字型搶頻寬
+  if ("requestIdleCallback" in window) requestIdleCallback(run, { timeout: 3000 });
+  else window.addEventListener("load", run);
 }
