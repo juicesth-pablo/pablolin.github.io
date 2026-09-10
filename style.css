@@ -1195,3 +1195,13 @@ html:active-view-transition-type(back)::view-transition-new(root){
 ::view-transition-new(root){
   animation: .5s cubic-bezier(.22,1,.36,1) both page-slide-up;
 }
+
+/* 讓導覽列在頁面切換時自成一層、固定不動（內容從它底下滑過）*/
+nav{
+  view-transition-name: site-nav;
+}
+
+/* 切換過程中 nav 永遠疊在最上層，不被滑動的頁面蓋住 */
+::view-transition-group(site-nav){
+  z-index: 10000;
+}
