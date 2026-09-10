@@ -147,8 +147,13 @@ nav ul{
   text-transform:uppercase
 }
 
+/* 選單連結：hover 變色要平滑、慢一點 */
+nav a{
+  transition:color .6s cubic-bezier(.22, 1, .36, 1);
+}
+
 nav a:hover{
-  opacity:.55
+  color:var(--accent);   /* hover 時文字變主色綠 */
 }
 
 /* 內頁導覽列標題：預設隱藏，往下滑、大標消失後才淡入 */
@@ -817,13 +822,13 @@ footer{
   margin-top:var(--space-sm);
 }
 
-/* gallery / shot：作品圖庫（兩欄，.tall 可跨兩列做直式圖） */
+/* gallery：間距統一由 gap 控制（想更寬/更窄只改這裡）*/
 .gallery{
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:3px;
-  margin-top:clamp(38px, 6.5vw, 70px);      /* 與「上方」分隔線的距離 */
-  margin-bottom:clamp(38px, 6.5vw, 70px);   /* 與「下方」分隔線的距離 */
+  gap:clamp(10px, 2vw, 20px);   /* ← 原本 3px，改成你要的間距 */
+  margin-top:clamp(38px, 6.5vw, 70px);
+  margin-bottom:clamp(38px, 6.5vw, 70px);
 }
 
 /* 方形圖庫：加上 .gallery-square 的頁面，圖片變 1:1 */
@@ -831,25 +836,11 @@ footer{
   aspect-ratio:1/1;
 }
 
+/* .shot 精簡：拿掉 padding 與沒用到的文字樣式 */
 .shot{
   aspect-ratio:4/5;
   background:none;
   border:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-family:var(--mono);
-  font-size:12px;
-  letter-spacing:.1em;
-  text-transform:uppercase;
-  color:var(--muted);
-  text-align:center;
-  padding:20px
-}
-
-.shot.tall{
-  aspect-ratio:auto;
-  grid-row:span 2
 }
 
 .shot img{
@@ -948,6 +939,7 @@ footer{
   max-width:1600px;
   padding:var(--cw-edge);
   color:var(--ink);
+  container-type:inline-size;   /* ← 新增：標題才能用 cqi 依容器寬縮放 */
 }
 
 .cw-hero-caption .backlink{
@@ -961,7 +953,7 @@ footer{
 
 /* 滿版大標：這裡是滿版，用 vw 縮放最合適 */
 .cw-title{
-  font-size:clamp(36px, 6.5vw, 80px);
+  font-size:clamp(30px, 8cqi, 62px);   /* ← 改成 cqi，全頁共用同一縮放 */
   font-weight:800;
   text-transform:uppercase;
   letter-spacing:-.03em;
@@ -1002,8 +994,7 @@ footer{
 }
 
 .cw-title.oneline{
-  white-space:nowrap;
-  font-size:clamp(30px, 8cqi, 62px);   /* 上限 46 → 58，桌機明顯變大 */
+  white-space:nowrap;   /* 只負責單行；字級沿用上面 .cw-title */
 }
 
 
@@ -1041,7 +1032,7 @@ footer{
 @media(max-width:820px){
   /* 導覽列：顯示選單連結並縮小塞進膠囊 */
   nav{gap:12px;padding:11px 20px}
-  nav ul{display:flex;gap:14px;font-size:11px;letter-spacing:.06em}
+  nav ul{gap:14px;font-size:11px;letter-spacing:.06em}
   nav .mark{font-size:14px}
 
   /* 首頁 HERO（手機版）：加大與選單列距離、下方留白對齊跑馬燈下方間距 */
@@ -1132,10 +1123,12 @@ footer{
     /* 不要覆寫 container-type，沿用桌機的 inline-size */
   }
 
-  /* 標題：手機也維持單行，字級依容器寬度等比縮放（cqi），長標題自動變小不換行 */
+  .cw-title{
+  font-size:clamp(22px, 6cqi, 44px);
+  }
+
   .cw-title.oneline{
-    white-space:nowrap;
-    font-size:clamp(22px, 6cqi, 44px);
+  white-space:nowrap;
   }
 
   /* metrics：手機維持三欄一行，縮小字級與欄距塞得下 */

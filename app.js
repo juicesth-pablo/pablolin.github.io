@@ -204,6 +204,7 @@ if (heroFx && heroEl && !matchMedia("(prefers-reduced-motion: reduce)").matches)
   });
   heroEl.addEventListener("pointerleave", () => { tx = 0; ty = 0; });  // 離開慢慢回中
 
+  let rafId = null;
   const tick = (t) => {
     cx += (tx - cx) * 0.06;   // 緩動係數：越小越「拖尾」、越流動
     cy += (ty - cy) * 0.06;
@@ -213,7 +214,17 @@ if (heroFx && heroEl && !matchMedia("(prefers-reduced-motion: reduce)").matches)
       const dy = cy * c.par + Math.cos(t * c.sy + c.ph) * c.ay;
       b.style.transform = `translate(-50%, -50%) translate(${dx}px, ${dy}px)`;
     });
-    requestAnimationFrame(tick);
+    rafId = requestAnimationFrame(tick);
   };
-  requestAnimationFrame(tick);
+
+  // 只有 hero 在畫面內才跑動畫，捲離就暫停、回來再續（省電 / 省 CPU）
+  const heroVis = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && rafId === null) {
+      rafId = requestAnimationFrame(tick);
+    } else if (!entry.isIntersecting && rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  });
+  heroVis.observe(heroEl);
 }
