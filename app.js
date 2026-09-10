@@ -147,3 +147,18 @@ if (navEl && darkZones.length) {
   }, { rootMargin: "-56px 0px -100% 0px", threshold: 0 });
   darkZones.forEach((z) => navColorWatch.observe(z));
 }
+
+
+/* ===== 首屏影片延後載入：先讓文字＋封面秒開，影片稍後再串流進來 ===== */
+const heroVideos = document.querySelectorAll("video[data-src]");
+if (heroVideos.length) {
+  const startVideo = (v) => {
+    if (v.dataset.loaded) return;   // 避免重複載
+    v.dataset.loaded = "1";
+    v.src = v.dataset.src;          // 這一刻才開始下載影片
+    v.play().catch(() => {});       // 靜音自動播放（被擋也不報錯）
+  };
+  // 等其他資源都就緒（window load）再開始拉影片
+  if (document.readyState === "complete") heroVideos.forEach(startVideo);
+  else window.addEventListener("load", () => heroVideos.forEach(startVideo));
+}

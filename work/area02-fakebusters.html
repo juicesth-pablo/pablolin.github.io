@@ -21,11 +21,13 @@
     <img src="../images/area02-fakebusters/area02-fakebusters-banner.webp" alt="">
   </div>
 
-  <!-- 右側：清晰直式影片 -->
+  <!-- 右側：清晰直式影片（延後載入：先顯示 poster，頁面就緒後才串流）-->
   <video class="cw-hero-video"
-    src="../videos/area02-fakebusters/area02-fakebusters-teaser.mp4"
-    autoplay muted loop playsinline
-    poster="../images/area02-fakebusters/area02-fakebusters-still.webp"></video>
+    muted loop playsinline
+    preload="none"
+    poster="../images/area02-fakebusters/area02-fakebusters-still.webp"
+    data-src="../videos/area02-fakebusters/area02-fakebusters-hero-video.mp4">
+  </video>
 
   <!-- 左側：文字容器 -->
   <div class="cw-hero-caption">
