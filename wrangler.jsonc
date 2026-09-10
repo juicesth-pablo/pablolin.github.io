@@ -1,9 +1,0 @@
-{
-  // name 要跟現有 Worker 一致，才會更新這個、不會另開新的
-  "name": "pablolin-github-io",
-  "compatibility_date": "2025-09-01",
-  "assets": {
-    "directory": ".",
-    "html_handling": "none"   // ← 關掉 .html 重導向，直接serve，動畫才會觸發
-  }
-}

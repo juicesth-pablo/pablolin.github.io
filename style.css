@@ -36,8 +36,6 @@
   --space-lg:  clamp(40px, 4vw, 64px);
   --space-xl:  clamp(72px, 9vw, 144px);
   --space-2xl: clamp(110px, 13vw, 208px);
-  /* 作品內頁標題區的上方留白（可獨立微調，隨螢幕等比縮放） */
-  --case-hero-top: clamp(96px, 11vw, 180px);
   /* Reels split hero：左右到邊界的間距（左右一致、隨螢幕等比縮放）*/
   --cw-edge:clamp(24px, 5vw, 64px);
 }
@@ -713,12 +711,6 @@ footer{
 
 
 /* ============ 11. 作品內頁 CASE STUDY ============ */
-/* case-hero / case-hero-grid：內頁頂端，左文字（含 metrics）右圖片 */
-.case-hero{
-  padding-top:var(--case-hero-top);
-  padding-bottom:var(--space-xl)
-}
-
 .backlink{
   font-family:var(--mono);
   font-size:12px;
@@ -741,48 +733,6 @@ footer{
   color:var(--accent);
   text-transform:uppercase;
   margin-bottom:var(--space-sm);
-}
-
-/* 讓左欄成為「量測容器」，標題依左欄寬度縮放，不影響右邊影片 */
-.case-hero-text{
-  container-type:inline-size;   /* 宣告這欄是容器，寬度由 grid 比例決定 */
-  min-width:0;                  /* 允許左欄照 1.3fr 縮放，不被標題撐寬 */
-}
-
-.case-title{
-  font-size:clamp(20px, 6cqi, 48px);   /* cqi = 左欄寬度的百分比，不是螢幕 */
-  white-space:nowrap;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:-.03em;
-  line-height:.9
-}
-
-.case-hero-grid{
-  display:grid;
-  grid-template-columns:1.3fr .9fr;
-  align-items:center;
-  gap:clamp(30px,5vw,70px)
-}
-
-.case-photo img{
-  width:100%;
-  aspect-ratio:4/5;
-  object-fit:contain;
-  display:block;
-  border:none;
-  border-radius:14px;
-}
-
-/* 影片作品：右側自動播放的影片（Reels 直式 9/16；橫式影片改 16/9） */
-.case-photo video{
-  width:120%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  display:block;
-  border:none;
-  border-radius:14px;
-  justify-self:end;
 }
 
 /* metrics / stat：成效數字（做成像首頁小字的輕量橫排） */
@@ -1155,28 +1105,12 @@ footer{
   .exp-row{grid-template-columns:1fr;gap:6px}
   .about-grid .body,.exp-row p{text-align:left;hyphens:none}
 
-  /* 作品內頁：hero 與內文收成單欄、圖片置中 */
-  .case-hero-grid{grid-template-columns:1fr;gap:28px}
-  /* 手機版：作品內頁影片加寬一點、隨螢幕等比縮放、置中 */
-  .case-photo video{
-    width:100%;         /* 主要調整鈕：想更寬就把這個 % 加大（例如 92%） */
-    max-width:400px;   /* 大手機上的安全上限，避免過寬 */
-    margin:0 auto;
-  }
-
   .case-body{grid-template-columns:1fr;gap:14px}
   /* 手機版：單欄要用 minmax(0,1fr)，格子才不會被大圖撐破 */
   .gallery{grid-template-columns:minmax(0,1fr)}
   /* grid 項目預設 min-width:auto 會被圖片撐開，強制歸零 */
   .shot{min-width:0}
   .shot.tall{grid-row:auto;aspect-ratio:4/3}
-
-  /* 手機版：作品內頁照片置中、限制最大寬避免破版 */
-  .case-photo img{
-    width:90%;
-    max-width:420px;
-    margin:0 auto;
-  }
 
   /* Copywriting 內頁手機版：banner 裁切對齊中間偏上（依你的圖調整） */
   .cw-hero-media img{
