@@ -967,7 +967,7 @@ footer{
   font-weight:400;
   letter-spacing:-.01em;
   line-height:1.4;
-  color:var(--ink);
+  color:var(--muted);
   max-width:42ch;
 }
 
